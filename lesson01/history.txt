@@ -1,0 +1,14 @@
+vim hello_world.c
+gcc hello_world.c
+./a.out
+cc --version
+cc hello_world.c
+file a.out
+hexdump a.out
+cc -S hello_world.c
+cat hello_world.s
+cc -O2 -S hello_world.c
+vim hello_world.s
+man puts
+man 3 printf
+cp hello_world.c hello_func_prototype.c
