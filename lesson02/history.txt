@@ -1,0 +1,13 @@
+vim hello_world.c
+gcc -O2 -W -Wall hello_world.c
+vim topics.md
+vim sum.c
+gcc sum.c
+vim sum_with_warn.c
+gcc sum_with_warn.c
+gcc sum_stack.c
+vim sum_stack_no_init.c
+vim sum_loc_var.c
+gcc sum_loc_var.c
+vim hello_world_correct.c
+./a.out ; echo $?
