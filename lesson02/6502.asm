@@ -1,0 +1,17 @@
+START:
+  LDA #50
+  JSR FILL_FIVE
+  BRK
+
+FILL_FIVE:
+  TAX
+  BEQ DONE
+  LDY #$00
+  LDA #$05
+LOOP:
+  STA $0200, Y
+  INY
+  DEX
+  BNE LOOP
+DONE:
+  RTS
