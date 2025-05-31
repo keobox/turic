@@ -1,0 +1,28 @@
+mkdir lesson03
+vim hello_world.c
+git add hello_world.c topics.md videos.txt
+git commit -am "Lesson 3 begins"
+git commit -am "Lesson 3 function w/ side effect"
+git commit -am "Lesson 3 local variable re-created"
+git commit -am "Lesson 3 global variable"
+git commit -am "Lesson 3 static variable in func"
+git commit -am "Lesson 3 passing by value"
+git commit -am "Use return value of a function"
+cp hello_world.c hello_float.c
+man 3 printf
+git add hello_float.c
+git commit -am "Lesson 3 floating point numbers"
+git commit -am "Lesson 3 warnings in printf format"
+git commit -am "Lesson 3 fix warnings"
+git commit -am "Lesson 3 implicit conversions in printf"
+cp hello_float.c hello_char.c
+vim hello_char.c
+git add hello_char.c
+git commit -am "Lesson 3 char type"
+git commit -am "Lesson 3 signed char overflow and wrapping"
+git commit -am "Lesson 3 implicit promotion char to int in expressions"
+git commit -am "Lesson 3 clarify the C specification on overflow"
+cp hello_char.c hello_legal_overflow.c
+vim hello_legal_overflow.c
+git add hello_legal_overflow.c
+git commit -am "Lesson 3 legal overflow of unsigned type"
