@@ -7,3 +7,4 @@
 * Static and global variables are not thread safe (needs mutexes).
 * Passing by value.
 * Use the return value of a function.
+* Float primitive type.
