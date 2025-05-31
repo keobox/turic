@@ -16,3 +16,7 @@
 to `double` and `short` is promoted to int. This is done before printing.
   * It's important to understand the presence of this implicit conversions.
 * The char type.
+* Char type overflow with warning. It's like goes on the last negative side.
+Prints -128. It's a wrapping due overflow.
+  * This wrapping is guranteed just for `signed` types but it's an undefined behaviour
+for the unsigned types, so is more dangerous.
