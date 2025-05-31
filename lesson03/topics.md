@@ -18,6 +18,6 @@ to `double` and `short` is promoted to int. This is done before printing.
 * The char type.
 * Char type overflow with warning. It's like goes on the last negative side.
 Prints -128. It's a wrapping due overflow.
-  * This wrapping is guranteed just for `signed` types but it's an undefined behaviour
-for the unsigned types, so is more dangerous.
+  * This wrapping is guranteed just for `unsigned` types but it's an undefined behaviour
+for the signed types, so is more dangerous. It's printing -128 but anything can happen.
 * Implicit promotion `char` to `int` in expressions.
