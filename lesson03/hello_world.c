@@ -7,8 +7,9 @@ int incr(int x) {
 
 int main(void) {
     int a = 10;
-    incr(a);
-    /* prints 10 */
+    /* Use return values of a function.
+       Now prints 11 */
+    a = incr(a);
     printf("%d\n", a);
     return 0;
 }
