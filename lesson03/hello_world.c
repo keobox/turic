@@ -1,15 +1,14 @@
 #include <stdio.h>
 
-void incr(void) {
-    static int x = 0;
+int incr(int x) {
     x = x + 1;
-    printf("%d\n", x);
+    return x;
 }
 
 int main(void) {
-    incr();
-    incr();
-    incr();
-    incr();
+    int a = 10;
+    incr(a);
+    /* prints 10 */
+    printf("%d\n", a);
     return 0;
 }
