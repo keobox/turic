@@ -1,7 +1,8 @@
 #include <stdio.h>
 
+int x = 0;
+
 void incr(void) {
-    int x = 1;
     x = x + 1;
     printf("%d\n", x);
 }
