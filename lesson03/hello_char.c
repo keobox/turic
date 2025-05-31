@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main(void) {
-    /* 127 = max positive char value (-128 to 127) */
-    char c = 128;
-    printf("%d\n", c);
+    char c = 127;
+    int i = c + 1;
+    printf("%d\n", i);
     return 0;
 }

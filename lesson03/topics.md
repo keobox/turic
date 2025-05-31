@@ -20,3 +20,4 @@ to `double` and `short` is promoted to int. This is done before printing.
 Prints -128. It's a wrapping due overflow.
   * This wrapping is guranteed just for `signed` types but it's an undefined behaviour
 for the unsigned types, so is more dangerous.
+* Implicit promotion `char` to `int` in expressions.
