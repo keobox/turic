@@ -8,3 +8,4 @@
 * Passing by value.
 * Use the return value of a function.
 * Float primitive type.
+* C is dangerous. Warnings can be runtime issues.
