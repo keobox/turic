@@ -8,5 +8,8 @@ void incr(void) {
 
 int main(void) {
     incr();
+    incr();
+    incr();
+    incr();
     return 0;
 }
