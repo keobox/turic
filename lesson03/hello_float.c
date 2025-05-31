@@ -2,7 +2,9 @@
 
 int main(void) {
     int a = 10;
-    float y = 1.1234;
-    printf("%d %f\n", a, y);
+    short s = 400;
+    unsigned int b = 20;
+    float y = 1.2349;
+    printf("%d %f\n", s, y);
     return 0;
 }
