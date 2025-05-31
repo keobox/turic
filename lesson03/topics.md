@@ -9,3 +9,5 @@
 * Use the return value of a function.
 * Float primitive type.
 * C is dangerous. Warnings can be runtime issues.
+* Why signal a problem in "double" instead of "float" in format string.
+* Study the floating point representation of number.
