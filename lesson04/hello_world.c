@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <stdint.h>
 
 int main(void) {
-    printf("Hello World\n");
+    int x = 5;
+    printf("Hello World: int is %d bytes\n", sizeof(x));
     return 0;
 }
