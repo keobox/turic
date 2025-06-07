@@ -2,6 +2,6 @@
 
 int main(void) {
     int x = 5;
-    printf("Hello World: int is %d bytes\n", (int) sizeof(x));
+    printf("Hello World: int is %lu bytes\n", sizeof(x));
     return 0;
 }
