@@ -12,3 +12,5 @@
   * Is possible to use `bc` command for calculations
   * 0 -- 4294967295 for unsigned int [0 -- (2^32 -1)]
   * -2147483648 -- 2147483647 for signed int  [-2^32/2 -- (2^32/2 - 1)] so [-2^31 -- (2^31 - 1)]
+* There's a way to know the ranges?
+  * <limits.h>
