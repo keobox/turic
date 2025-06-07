@@ -21,3 +21,8 @@
   * Warning: do not use `int` to save memory addresses in 64 bit HW architecture.
 * The `<stdint.h>` contains C-99 "new" standard types: `uint64_t`, `int64_t`, `size_t`, `intptr_t`, `uintptr_t`.
   * The `ptr` types assure a memory address is containable.
+* Back to old hello world.
+* Dissertation about function calling and indentation.
+* In C buffer flush `fflush` is automatic after a new line.
+* Strings in C are sequences of `char`.
+* Sequence of control VT100 in the hello world: [H means go home, first char of the terminal window.
