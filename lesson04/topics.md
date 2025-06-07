@@ -14,3 +14,8 @@
   * -2147483648 -- 2147483647 for signed int  [-2^32/2 -- (2^32/2 - 1)] so [-2^31 -- (2^31 - 1)]
 * There's a way to know the ranges?
   * <limits.h>
+* The story is that the C standard does not guarantees type sizes.
+  * But on modern 32 or 64 bits HW there's a kind of standardization.
+  * In the 99% of cases the size are in `hello_world_sizes.c`.
+  * The long type is the `word` size of the HW architecture.
+  * Warning: do not use `int` to save memory addresses in 64 bit HW architecture.
