@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int main(void) {
-    printf("[%c%c%c%c%c]\n", 65, 'x', 67, 68, 69);
+    char str[6] = {'h', 'e', 'l','l', 'o', 0};
+    printf("%s\n", str);
     return 0;
 }
