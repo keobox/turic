@@ -1,0 +1,2 @@
+gcc string.c -Wall -W -O2
+man ascii
