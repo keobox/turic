@@ -2,11 +2,7 @@
 
 int main(void) {
     char str[6] = {'h', 'e', 'l','l', 'o', 0};
-    int i = 0;
-    while(str[i] != 0) {
-        printf("%c", str[i]);
-        i++;
-    }
-    printf("\n");
+    char str2[6] = "hello";
+    printf("Hello world %s %s\n", str, str2);
     return 0;
 }

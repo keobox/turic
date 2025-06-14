@@ -12,3 +12,4 @@
 * C strings are array of chars terminated by 0, the NUL terminator.
   * WARNING: it's important having the NUL terminator.
   * See `man ascii` and notice NUL = 000.
+* C string literals.
