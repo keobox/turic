@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int main(void) {
-    printf("Hello world %d\n", 10);
+    char c = 10;
+    printf("Hello world %d\n", c);
     return 0;
 }
