@@ -8,3 +8,4 @@
   * char c = 'A' is a C liter char,
 * String literal.
 * `printf` can print chars passing a number or a char literal.
+* Arrays init. Array initialization.
