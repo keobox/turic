@@ -6,3 +6,4 @@
 * `vi` CTRL-V + CTRL-A Verbatim char.
   * Verbatim char is still an integer under the hood C handles integers even for string representation.
   * char c = 'A' is a C liter char,
+* String literal.
