@@ -9,3 +9,6 @@
 * String literal.
 * `printf` can print chars passing a number or a char literal.
 * Arrays init. Array initialization.
+* C strings are array of chars terminated by 0, the NUL terminator.
+  * WARNING: it's important having the NUL terminator.
+  * See `man ascii` and notice NUL = 000.
