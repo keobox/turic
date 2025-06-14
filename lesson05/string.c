@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 int main(void) {
-    printf("Hello world\n");
-    exit(1);
+    printf("Hello world %d\n", 10);
+    return 0;
 }
