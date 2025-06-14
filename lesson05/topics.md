@@ -16,3 +16,5 @@
 * char array dimension can be removed to obtain a string literal.
 * Size of a string in bytes with `sizeof`.
   * IMPORTANT: sizeof operator calculate size at compile time.
+* Since strings are array of char I can set one char of it by index.
+  * Strings are not immutable.
