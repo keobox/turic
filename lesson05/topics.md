@@ -14,3 +14,5 @@
   * See `man ascii` and notice NUL = 000.
 * C string literals.
 * char array dimension can be removed to obtain a string literal.
+* Size of a string in bytes with `sizeof`.
+  * IMPORTANT: sizeof operator calculate size at compile time.
