@@ -14,3 +14,4 @@
   * In this case the string format for pointers is `%p`.
   * Notice that there's a gap of 4 bytes between variables.
     * Ints are 4 bytes long.
+* Use if and goto for doing a loop.
