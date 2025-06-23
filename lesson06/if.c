@@ -1,12 +1,11 @@
 #include <stdio.h>
 
 int main(void) {
-    int i = 2;
+    int i = 5;
 
-    if (i > 3) {
+    if (i > 3)
         printf("i > 3\n");
-    } else {
+    else
         printf("i <= 3\n");
-    }
     return 0;
 }
