@@ -1,9 +1,9 @@
 #include <stdio.h>
 
 int main(void) {
-    int i = 0;
-again:
-    printf("%d\n", i);
-    i++;
-    if (i < 10) goto again;
+
+    l10: printf("hello\n");
+    l20: goto l10;
+
+    return 0;
 }
