@@ -10,3 +10,7 @@
 * Blocks
   * I can write a block anywhere.
   * Variable inside a block are visible within a block: variable scope is in the block.
+* Print the address of a local variable in the stack: a.k.a a pointer value.
+  * In this case the string format for pointers is `%p`.
+  * Notice that there's a gap of 4 bytes between variables.
+    * Ints are 4 bytes long.
