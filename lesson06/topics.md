@@ -21,3 +21,4 @@
 * How a while loop can be translated to goto-if? Showed.
 * Use recursion for looping using if without goto.
   * Cliff-hanger tail call optimization (in a next lesson)
+* Recursion uses much more stack memory, be careful.
