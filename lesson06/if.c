@@ -1,9 +1,13 @@
 #include <stdio.h>
 
 int main(void) {
-    int i = 5;
-
-    if (i > 3) printf("i > 3\n");
-    else printf("i <= 3\n");
+    int i = 8;
+    {
+        int i = 5;
+        printf("i is %d\n", i);
+        // inner i scope finishes here
+    }
+    // outer block i is visible here
+    printf("i is %d\n", i);
     return 0;
 }
