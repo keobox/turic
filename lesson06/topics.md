@@ -16,3 +16,4 @@
     * Ints are 4 bytes long.
 * Use if and goto for doing a loop.
 * A "Basic language like" C program.
+* If and goto are like a while.
