@@ -18,3 +18,4 @@
 * A "Basic language like" C program.
 * If and goto are like a while.
 * A while loop.
+* How a while loop can be translated to goto-if? Showed.
