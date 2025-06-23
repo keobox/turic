@@ -17,3 +17,4 @@
 * Use if and goto for doing a loop.
 * A "Basic language like" C program.
 * If and goto are like a while.
+* A while loop.
