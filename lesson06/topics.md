@@ -7,3 +7,6 @@
   * It's possible to write everything on one line.
     * Style comments about this: less code on vertical axis.
     * Do not waste time for style wars be coherent with the project style.
+* Blocks
+  * I can write a block anywhere.
+  * Variable inside a block are visible within a block: variable scope is in the block.
