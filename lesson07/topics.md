@@ -12,3 +12,4 @@
 * Go back to infinite while loop instead of infinite for loop.
 * Scoped variable in a for loop.
 * Use an array in the for loop.
+  * Show an example where a scoped variable is not convenient, in case the checks are outside the loop.
