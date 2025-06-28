@@ -5,11 +5,14 @@ int main (void) {
 
     switch(i) {
         case 5:
-            // won't compile
-            // int j = 0;
+        {
+            // declare a block for scoped variable
+            int j = 0;
             printf("Is a five\n");
             printf("It's really a five\n");
-            // break;
+            printf("j=%d\n", j);
+            break;
+        }
         case 7:
             printf("Is a seven\n");
             break;
