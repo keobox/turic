@@ -2,14 +2,14 @@
 
 void count(int start, int end) {
     if (start > end) return;
-    printf("%d\n", start);
+    printf("%d %p\n", start, &start);
     count(start+1, end);
 }
 
 void count_tail_call_optimized(int start, int end) {
 iterate:
     if (start > end) return;
-    printf("%d\n", start);
+    printf("%d %p\n", start, &start);
     start = start + 1;
     goto iterate;
 }
