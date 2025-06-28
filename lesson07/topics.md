@@ -15,3 +15,4 @@
   * Show an example where a scoped variable is not convenient, in case the checks are outside the loop.
 * Brief description of `do-while` but no demo.
 * Switch.
+  * The only difference with if is that if break is not present we go in the next case.
