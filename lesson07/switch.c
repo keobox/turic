@@ -7,7 +7,7 @@ int main (void) {
         case 5:
             printf("Is a five\n");
             printf("It's really a five\n");
-            break;
+            // break;
         case 7:
             printf("Is a seven\n");
             break;
