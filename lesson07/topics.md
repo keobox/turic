@@ -18,3 +18,5 @@
   * The only difference with if is that if break is not present we go in the next case.
   * Is not possible adding a scoped variable in a `case`. `case` is like a goto label.
   * By adding a block is possible to declare a scoped variable in a `case` statement.
+* Showed that switch use is not that much in a real codebase.
+* Showed a recursive function to resolve `globbing` in file names: is recursive in the `'*'` `case`.
