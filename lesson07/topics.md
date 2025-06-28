@@ -10,3 +10,4 @@
   * Skip the condition part and use `if` and `break` in the for loop.
   * Transform a for loop in a while loop. Notice that the condition is negated respect before.
 * Go back to infinite while loop instead of infinite for loop.
+* Scoped variable in a for loop.

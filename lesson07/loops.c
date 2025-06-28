@@ -1,11 +1,8 @@
 #include <stdio.h>
 
 int main (void) {
-    int i = 0;
-    while (1) {
-        if (i >= 10) break;
-        printf("%d\n", i);
-        i++;
-    }
+    for (int i = 0; i < 10; i++) printf("%d\n", i);
+    // i is scoped in the for block and can be seen out of it.
+    // printf("%d\n", i);
     return 0;
 }
