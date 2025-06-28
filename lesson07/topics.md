@@ -6,3 +6,4 @@
   * Notice that in the optimized case there's no extra stack usage.
 * While.
 * For. It's a equivalent to `while`, it's just "syntactic sugar".
+  * Since the initialization part is already done we can skip it and leave just the `;`.
