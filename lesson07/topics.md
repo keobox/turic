@@ -16,3 +16,4 @@
 * Brief description of `do-while` but no demo.
 * Switch.
   * The only difference with if is that if break is not present we go in the next case.
+  * Is not possible adding a scoped variable in a `case`. `case` is like a goto label.
