@@ -5,6 +5,8 @@ int main (void) {
 
     switch(i) {
         case 5:
+            // won't compile
+            // int j = 0;
             printf("Is a five\n");
             printf("It's really a five\n");
             // break;
