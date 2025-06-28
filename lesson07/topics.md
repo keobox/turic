@@ -13,3 +13,4 @@
 * Scoped variable in a for loop.
 * Use an array in the for loop.
   * Show an example where a scoped variable is not convenient, in case the checks are outside the loop.
+* Brief description of `do-while` but no demo.
