@@ -9,3 +9,4 @@
   * Since the initialization part is already done we can skip it and leave just the `;`.
   * Skip the condition part and use `if` and `break` in the for loop.
   * Transform a for loop in a while loop. Notice that the condition is negated respect before.
+* Go back to infinite while loop instead of infinite for loop.
