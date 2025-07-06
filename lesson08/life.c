@@ -10,6 +10,11 @@ void setcell(char* grid, int x, int y, int state) {
     grid[y * GRID_COLS + x] = state;
 }
 
+/* This function returns the state of the grid at x,y */
+char getcell(char* grid, int x, int y) {
+    return grid[y * GRID_COLS + x];
+}
+
 int main(void) {
     char grid[GRID_COLS * GRID_ROWS];
     setcell(grid, 10, 10, ALIVE);
