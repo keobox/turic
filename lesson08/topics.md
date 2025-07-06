@@ -9,3 +9,4 @@
 * Write `print_grid` and `set_grid` and test base functions.
 * At minute 37:30 showed a "Glider" a initial set of cells that "walks" in the grid.
 * Add VT100 escape sequence to clear the screen.
+* Implement and test the count `count_living_neighbors` function.
