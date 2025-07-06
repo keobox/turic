@@ -1,0 +1,2 @@
+gcc life.c -O2 -Wall -W
+clear | hexdump -C

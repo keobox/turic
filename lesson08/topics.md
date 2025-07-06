@@ -7,3 +7,5 @@
 * Write the `getcell` function.
 * Refactoring: write a lower layer `cell_to_index` function that implements wrapping. Now set and get cell function use `cell_to_index`.
 * Write `print_grid` and `set_grid` and test base functions.
+* At minute 37:30 showed a "Glider" a initial set of cells that "walks" in the grid.
+* Add VT100 escape sequence to clear the screen.
