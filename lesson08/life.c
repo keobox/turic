@@ -2,6 +2,7 @@
 
 #define GRID_COLS 20
 #define GRID_ROWS 20
+#define GRID_CELLS (GRID_COLS*GRID_ROWS)
 #define ALIVE '*'
 #define DEAD '.'
 
@@ -36,6 +37,7 @@ char get_cell(char* grid, int x, int y) {
 /* Show the grid on the screen, clearing the terminal using the required
    VT100 escape sequence */
 void print_grid(char* grid) {
+    printf("\x1b[3J\x1b[H\x1b[2J"); // Clear screen
     for (int y = 0; y < GRID_ROWS; y++) {
         for (int x = 0; x < GRID_COLS; x++) {
             printf("%c", get_cell(grid, x, y));
@@ -55,19 +57,10 @@ void set_grid(char* grid, char state) {
 }
 
 int main(void) {
-    char grid[GRID_COLS * GRID_ROWS];
-    set_grid(grid, DEAD);
-    set_cell(grid, 10, 10, ALIVE);
-    /* BEGIN test wrapping */
-    set_cell(grid, 19, 10, ALIVE);
-    set_cell(grid, 20, 10, ALIVE);
-    set_cell(grid, 40, 11, ALIVE);
-    set_cell(grid, 41, 11, ALIVE);
-    set_cell(grid, -1, 12, ALIVE);
-    set_cell(grid, -19, 12, ALIVE);
-    set_cell(grid, -20, 12, ALIVE);
-    set_cell(grid, -21, 13, ALIVE);
-    /* END   test wrapping */
-    print_grid(grid);
+    // char new_grid[GRID_CELLS];
+    char old_grid[GRID_CELLS];
+    set_grid(old_grid, DEAD);
+    set_cell(old_grid, 10, 10, ALIVE);
+    print_grid(old_grid);
     return 0;
 }
