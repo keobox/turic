@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 #define GRID_COLS 20
 #define GRID_ROWS 20
@@ -94,8 +95,13 @@ int main(void) {
     set_cell(old_grid, 10, 10, ALIVE);
     set_cell(old_grid, 10, 11, ALIVE);
     set_cell(old_grid, 10, 12, ALIVE);
-    compute_new_state(old_grid, new_grid);
-    print_grid(old_grid);
-    print_grid(new_grid);
+    while (1) {
+        compute_new_state(old_grid, new_grid);
+        print_grid(new_grid);
+        sleep(1);
+        compute_new_state(new_grid, old_grid);
+        print_grid(old_grid);
+        sleep(1);
+    }
     return 0;
 }
