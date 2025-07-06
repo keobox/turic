@@ -68,20 +68,34 @@ int count_living_neighbors(char *grid, int x, int y) {
     return alive;
 }
 
+/* Compute the new state of Game of Life according to its rules. */
+void compute_new_state(char* old, char* new) {
+    for (int y = 0; y < GRID_ROWS; y++) {
+        for (int x = 0; x < GRID_COLS; x++) {
+            int n_alive = count_living_neighbors(old, x, y);
+            char new_state = DEAD;
+            if (get_cell(old, x, y) == ALIVE) {
+                if (n_alive == 2 || n_alive == 3)
+                    new_state = ALIVE;
+            } else {
+                if (n_alive == 3)
+                    new_state = ALIVE;
+            }
+            set_cell(new, x, y, new_state);
+        }
+    }
+}
+
 int main(void) {
-    // char new_grid[GRID_CELLS];
+    char new_grid[GRID_CELLS];
     char old_grid[GRID_CELLS];
     set_grid(old_grid, DEAD);
+    set_grid(new_grid, DEAD);
     set_cell(old_grid, 10, 10, ALIVE);
     set_cell(old_grid, 10, 11, ALIVE);
+    set_cell(old_grid, 10, 12, ALIVE);
+    compute_new_state(old_grid, new_grid);
     print_grid(old_grid);
-    /* BEGIN Test count_living_neighbors */
-    /* expected to print 1 */
-    printf("%d\n", count_living_neighbors(old_grid, 10, 12));
-    /* expected to print 2 */
-    printf("%d\n", count_living_neighbors(old_grid, 9, 10));
-    /* expected to print 1 */
-    printf("%d\n", count_living_neighbors(old_grid, 10, 10));
-    /* END   Test count_living_neighbors */
+    print_grid(new_grid);
     return 0;
 }

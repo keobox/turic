@@ -10,3 +10,4 @@
 * At minute 37:30 showed a "Glider" a initial set of cells that "walks" in the grid.
 * Add VT100 escape sequence to clear the screen.
 * Implement and test the count `count_living_neighbors` function.
+* Implement and test the count `compute_new_state` function.
