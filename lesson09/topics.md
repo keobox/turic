@@ -8,3 +8,4 @@ not near the type.
 the compiler knows how big is the object pointed by the pointer via the pointer type.
 * Pointer syntax equivalence with arrays.
 * Passing a pointer to a function.
+* Passing a variable by reference using a pointer.

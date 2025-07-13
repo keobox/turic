@@ -6,10 +6,8 @@ void incr(int *p) {
 
 int main(void) {
     int x = 5;
-    int *y = NULL; // same as int *y=0
     printf("x was %d\n", x);
-    y = &x;
-    incr(y);
+    incr(&x);
     printf("x is %d\n", x);
     return 0;
 }
