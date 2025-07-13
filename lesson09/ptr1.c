@@ -6,7 +6,8 @@ int main(void) {
     printf("x was %d\n", x);
     y = &x;
     printf("x is stored at the address: %p\n", y);
-    *y = 10;
+    // *y = 10;
+    y[0] = 10;
     printf("x is %d\n", x);
     return 0;
 }
