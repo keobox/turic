@@ -12,3 +12,8 @@ of the address BUS of the microprocessor.
 * Casting to int.
 * In C the an array variable is equivalent to a pointer, hence can be assigned to a pointer.
   * There's no need to use the `&` operator durin assignment.
+* Show the pointer/array equivalence for a array of chars and demo pointer mathematics.
+  * Print the first 2 chars of a string using the pointer in array notation and using
+deferencing plus a mathematic operation on address.
+  * This proves that `*(p+1)` moves the pointer by 1 byte (a char).
+  * So, type of pointer is important in pointer mathematics.
