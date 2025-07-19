@@ -17,3 +17,5 @@ of the address BUS of the microprocessor.
 deferencing plus a mathematic operation on address.
   * This proves that `*(p+1)` moves the pointer by 1 byte (a char).
   * So, type of pointer is important in pointer mathematics.
+* Another demo of pointers math: navigating a atring with a pointer to short.
+  * This shows that the address changes by the summed number * sizeof of the pointer type.
