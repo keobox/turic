@@ -8,3 +8,5 @@
 * Note: all pointers are just numbers, the size of these numbers is the same
 of the address BUS of the microprocessor.
 * Pointer of pointer and prove a pointer as an address itself.
+* Size of pointers with this microprocessor.
+* Casting to int.
