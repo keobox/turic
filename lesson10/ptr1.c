@@ -3,7 +3,7 @@
 int main(void) {
     int x = 5;
     int *y = &x;
-    printf("x is stored in %p and the value is %d\n", y, x);
-    printf("x is stored in %p and the value is %d\n", &x, x);
+    int **z = &y;
+    printf("x is stored in %p and y is stored in %p\n", y, z);
     return 0;
 }
