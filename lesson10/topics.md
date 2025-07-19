@@ -10,3 +10,5 @@ of the address BUS of the microprocessor.
 * Pointer of pointer and prove a pointer as an address itself.
 * Size of pointers with this microprocessor.
 * Casting to int.
+* In C the an array variable is equivalent to a pointer, hence can be assigned to a pointer.
+  * There's no need to use the `&` operator durin assignment.
