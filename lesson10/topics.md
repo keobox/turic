@@ -20,3 +20,4 @@ deferencing plus a mathematic operation on address.
 * Another demo of pointers math: navigating a atring with a pointer to short.
   * This shows that the address changes by the summed number * sizeof of the pointer type.
 * Print a string using a char pointer.
+* Write your own print function.
