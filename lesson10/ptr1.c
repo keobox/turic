@@ -3,7 +3,7 @@
 int main(void) {
     char mystr[] = "Hello World";
     char *p = mystr;
-    printf("At %p I can see: %s\n", mystr, mystr);
-    printf("At %p I can see: %s\n", p, mystr);
+    printf("%c%c\n", p[0], p[1]);
+    printf("%c%c\n", *p, *(p+1));
     return 0;
 }
