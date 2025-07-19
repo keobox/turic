@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void incr(int *p) {
+    printf("Before incr %d\n", *p);
     p[0] = p[0] + 1;
 }
 
