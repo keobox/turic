@@ -19,3 +19,4 @@ deferencing plus a mathematic operation on address.
   * So, type of pointer is important in pointer mathematics.
 * Another demo of pointers math: navigating a atring with a pointer to short.
   * This shows that the address changes by the summed number * sizeof of the pointer type.
+* Print a string using a char pointer.
