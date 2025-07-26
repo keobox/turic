@@ -10,3 +10,4 @@ one position and this is equivalent to move 8 bit by 8 positions, so
 8 positions corresponds to multiply by 2^8 = 256.
 * Back to write something like a printf using a char pointer.
 * Clarify a doubt: the '0' character is not the 0 number!
+* Inserting a real 0, using octal, in the array of char so that while stops earlier.
