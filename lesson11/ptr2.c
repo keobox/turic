@@ -1,9 +1,12 @@
 #include <stdio.h>
 
 int main(void) {
-    char str[] = {1, 1, 2, 2};
-    short* s = (short*) str;
-    printf("Dec %d\t%d\n", s[0], s[1]);
-    printf("Hex %x\t%x\n", s[0], s[1]);
+    char str[] = "Hello0000123";
+    char *p = str;
+    while(*p) {
+        putchar(*p);
+        p++;
+    }
+    printf("\n");
     return 0;
 }
