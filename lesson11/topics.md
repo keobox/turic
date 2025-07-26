@@ -13,3 +13,4 @@ one position and this is equivalent to move 8 bit by 8 positions, so
 * Inserting a real 0, using octal, in the array of char so that while stops earlier.
 * Implementing a safe string type: prefixed length strings.
 * Back to Game of Life program in Lesson 8.
+  * Remove the code duplication thanks to pointers.
