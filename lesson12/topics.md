@@ -21,3 +21,4 @@ byte value.
   * What if my string is used with printf?
   * Fix that at least for not to crash.
 * Implement a prefixed string to c-string conversion.
+* `free` the memory, now the program is correct.

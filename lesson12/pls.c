@@ -53,5 +53,6 @@ int main(void) {
     ps_print(mystr);
     ps_print(mystr);
     printf("%s\n", ps_getc(mystr));
+    free(mystr);
     return 0;
 }
