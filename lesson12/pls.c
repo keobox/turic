@@ -19,7 +19,7 @@
  */
 
 char *ps_create(char *init, int len) {
-    char *s = malloc(1 + len);
+    char *s = malloc(1 + len + 1);
     unsigned char *lenptr = (unsigned char *) s;
     // write the length in the first byte
     *lenptr = len;
@@ -27,6 +27,7 @@ char *ps_create(char *init, int len) {
     for (int j = 0; j < len ; j++) {
         s[j+1] = init[j];
     }
+    s[len + 1] = 0;
     return s;
 }
 
@@ -44,5 +45,6 @@ int main(void) {
     char *mystr = ps_create("Hello World", 11);
     ps_print(mystr);
     ps_print(mystr);
+    printf("%s\n", mystr);
     return 0;
 }

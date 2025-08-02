@@ -17,3 +17,6 @@ byte value.
 * Enter malloc and free.
   * `man malloc`
 * My comment: `ps_free` is missing.
+* Defensive programming.
+  * What if my string is used with printf?
+  * Fix that at least for not to crash.
