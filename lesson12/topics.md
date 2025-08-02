@@ -3,4 +3,8 @@
 * Recall that the safe string type: prefixed string, implemented in Lesson 11
 is a Pascal style string.
   * In that implementation the first byte contain the length of the string.
-
+* We will implement a prefixed string in C in this lesson.
+  * This will be done in two ways, one has limitations.
+  * This is done to highlight some shortcomings (and hopefully how to
+deal with these).
+  * The first implementation uses a char array on stack.
