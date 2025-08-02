@@ -31,6 +31,13 @@ char *ps_create(char *init, int len) {
     return s;
 }
 
+/* Returns the pointer to the NULL terminated c-string embedded
+   inside or PS 's' string.
+ */
+char *ps_getc(char *s) {
+    return s + 1;
+}
+
 /* Display the string s on the screen.
  */
 void ps_print(char *s) {
@@ -45,6 +52,6 @@ int main(void) {
     char *mystr = ps_create("Hello World", 11);
     ps_print(mystr);
     ps_print(mystr);
-    printf("%s\n", mystr);
+    printf("%s\n", ps_getc(mystr));
     return 0;
 }
