@@ -8,3 +8,5 @@ is a Pascal style string.
   * This is done to highlight some shortcomings (and hopefully how to
 deal with these).
   * The first implementation uses a char array on stack.
+* Show that the implementation can work with 0 in the buffer, 0 is no more a special
+byte value.
