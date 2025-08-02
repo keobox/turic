@@ -10,3 +10,10 @@ deal with these).
   * The first implementation uses a char array on stack.
 * Show that the implementation can work with 0 in the buffer, 0 is no more a special
 byte value.
+* Where is the problem?
+  * What if I want many strings?
+  * Should I create many buffers on stack? Or use global buffers?
+* To solve this we will update the code.
+* Enter malloc and free.
+  * `man malloc`
+* My comment: `ps_free` is missing.
