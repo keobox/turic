@@ -30,7 +30,7 @@ void ps_print(char *s) {
 
 int main(void) {
     char buf[256];
-    ps_init(buf, "Hello World", 11);
+    ps_init(buf, "Hell\000 World", 11);
     ps_print(buf);
     ps_print(buf);
     return 0;
