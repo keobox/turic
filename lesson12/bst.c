@@ -44,6 +44,20 @@ struct node *add(struct node* root, int val)
     }
 }
 
+/* Implement and Inorder tree walk of the tree to print sorted values */
+void print_sorted(struct node *root) {
+    // This is an Inorder tree walk
+    if (root == NULL) return;
+
+    if (root->left)
+        print_sorted(root->left);
+
+    printf("%d\n", root->val);
+
+    if (root->right)
+        print_sorted(root->right);
+}
+
 int main () {
     struct node *root = NULL;
     root = add(root, 10);
@@ -52,5 +66,6 @@ int main () {
     root = add(root, 100);
     root = add(root, 40);
     root = add(root, 33);
+    print_sorted(root);
     return 0;
 }

@@ -33,3 +33,6 @@ I'd prefer to ask a simple problem that can be solved with a specific data struc
 the candidate should defend why she/he pick that structure and the trade off of chosing it.
 * Highlight: `sizeof(*new)` the `*` operator give the size to the pointed struct.
 * Skipping `malloc` error handling for brevity.
+* The second main idea is that a BST can be navigated recursively this can be used to print
+sorted values, ascending.
+* My comment: the `print_sorted` function is an "Inorder tree walk" and the idea is first go left the print (visit) then go right.
