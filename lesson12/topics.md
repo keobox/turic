@@ -22,3 +22,14 @@ byte value.
   * Fix that at least for not to crash.
 * Implement a prefixed string to c-string conversion.
 * `free` the memory, now the program is correct.
+
+# Appendix 01
+* After a discussion on LinkedIn about programming interviews Antirez decided to clarify
+what is the his way to face tech interviews by coding a Binary Search Tree from scratch
+by using the single idea that the node on the left has a smaller
+value and node on the right has a bigger value respect to the current node.
+* My comment: this is a form of Live coding and I don't like this that much.
+I'd prefer to ask a simple problem that can be solved with a specific data structure and
+the candidate should defend why she/he pick that structure and the trade off of chosing it.
+* Highlight: `sizeof(*new)` the `*` operator give the size to the pointed struct.
+* Skipping `malloc` error handling for brevity.
