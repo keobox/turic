@@ -36,3 +36,10 @@ the candidate should defend why she/he pick that structure and the trade off of 
 * The second main idea is that a BST can be navigated recursively this can be used to print
 sorted values, ascending.
 * My comment: the `print_sorted` function is an "Inorder tree walk" and the idea is first go left the print (visit) then go right.
+* Great trick by Antirez! Use Gemini as code reviewer!
+  * This is what Gemini spotted.
+  * Not checking for same `val` so value duplication allowed on the left,
+but this was more a design choice.
+  * Missing `free_tree` function: a recursive approach can be used also in this case.
+  * This can be done with a "Postorder" tree walk.
+  * For completeness in the "Preorder" tree walk, the root node gets visited first, followed by left and right subtrees.
