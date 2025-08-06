@@ -49,13 +49,20 @@ void print_sorted(struct node *root) {
     // This is an Inorder tree walk
     if (root == NULL) return;
 
-    if (root->left)
-        print_sorted(root->left);
+    print_sorted(root->left);
 
+    // visit
     printf("%d\n", root->val);
 
-    if (root->right)
-        print_sorted(root->right);
+    print_sorted(root->right);
+}
+
+/* delete the BST using a Postorder tree walk */
+void free_tree(struct node *root) {
+    if (root == NULL) return;
+    free_tree(root->left);
+    free_tree(root->right);
+    free(root);
 }
 
 int main () {
@@ -67,5 +74,7 @@ int main () {
     root = add(root, 40);
     root = add(root, 33);
     print_sorted(root);
+    free_tree(root);
+    root = NULL;
     return 0;
 }
