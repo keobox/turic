@@ -43,3 +43,5 @@ but this was more a design choice.
   * Missing `free_tree` function: a recursive approach can be used also in this case.
   * This can be done with a "Postorder" tree walk.
   * For completeness in the "Preorder" tree walk, the root node gets visited first, followed by left and right subtrees.
+* Final thoughts: Antirez said he's not using a tree like this since 30 years ago he used more
+radix tree and skiplists.
