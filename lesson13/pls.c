@@ -60,5 +60,6 @@ int main(void) {
     ps_print(mystr);
     printf("%s %d\n", mystr, (int)ps_len(mystr));
     ps_free(mystr);
+    // ps_free(mystr);
     return 0;
 }
