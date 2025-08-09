@@ -48,11 +48,18 @@ void ps_free(char *s) {
     free(s-4);
 }
 
+/* Returns the string's length in O(1) */
+uint32_t ps_len(char *s) {
+    uint32_t *lenptr = (uint32_t *) (s-4);
+    return *lenptr;
+}
+
 int main(void) {
     char *mystr = ps_create("Hello WorldHello WorldHello World", 33);
     ps_print(mystr);
     ps_print(mystr);
-    printf("%s\n", mystr);
+    printf("%s %d\n", mystr, (int)ps_len(mystr));
     ps_free(mystr);
+    // ps_free(mystr);
     return 0;
 }
