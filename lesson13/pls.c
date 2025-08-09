@@ -8,9 +8,9 @@
  * string in 'init' of length 'len'.
  *
  * The created string has the following layout:
- * +-+---------------\\\
- * |LLLL|My string here
- * +-+---------------\\\
+ * +-+-------------------\\\
+ * |LLLL|CCCC|My string here
+ * +-+-------------------\\\
  *
  * Where LLLL are four unsigned bytes containing the total length of the string.
  * Thus these strings are binary safe: bytes of value 0 are permitted in
@@ -54,12 +54,15 @@ uint32_t ps_len(char *s) {
     return *lenptr;
 }
 
+char *global_string;
+
 int main(void) {
     char *mystr = ps_create("Hello WorldHello WorldHello World", 33);
+    global_string = mystr;
     ps_print(mystr);
     ps_print(mystr);
     printf("%s %d\n", mystr, (int)ps_len(mystr));
     ps_free(mystr);
-    // ps_free(mystr);
+    // printf("%s\n", global_string);
     return 0;
 }
