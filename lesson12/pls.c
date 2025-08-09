@@ -49,7 +49,7 @@ void ps_print(char *s) {
 }
 
 int main(void) {
-    char *mystr = ps_create("Hello World", 11);
+    char *mystr = ps_create("Hello WorldHello WorldHello World", 33);
     ps_print(mystr);
     ps_print(mystr);
     printf("%s\n", ps_getc(mystr));
