@@ -6,3 +6,4 @@
 * To review C structs write a program for fractions handling.
 * To make room for 2 ints numerator and denominator I could use a `malloc`.
 * Add basic function for frations handling.
+* Refactor `set_fraction` to `create_fraction`.

@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void set_fraction(int *f, int num, int dem) {
+/* The function returns NULL if there's no memory else it returns the fraction 'object' */
+int *create_fraction(int num, int den) {
+    int *f = malloc(sizeof(int)*2);
+    // malloc error checking
+    if (f == NULL) return NULL;
     f[0] = num;
-    f[1] = dem;
+    f[1] = den;
+    return f;
 }
 
 void print_fraction(int *f) {
@@ -11,8 +16,10 @@ void print_fraction(int *f) {
 }
 
 int main(void) {
-    int *f = malloc(sizeof(int)*2);
-    set_fraction(f, 1, 2);
-    print_fraction(f);
+    int *f1 = create_fraction(1, 2);
+    int *f2 = create_fraction(3, 4);
+    // Should check f1, f2 for NULL
+    print_fraction(f1);
+    print_fraction(f2);
     return 0;
 }
