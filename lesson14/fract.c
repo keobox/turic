@@ -35,8 +35,10 @@ int main(void) {
     printf("%d\n", (int) sizeof(struct fract));
 
     struct fract a;
-    a.num = 1;
-    a.den = 2;
+    struct fract *b;
+    b = &a;
+    b->num = 1;
+    b->den = 2;
     printf("%d/%d\n", a.num, a.den);
 
 #if 0

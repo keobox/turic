@@ -24,3 +24,7 @@ Now `struct` size is 20 due to memory aligment.
 * In reality is possible to avoid memory aligment problem via `bitfields` and `packed struct`,
 we will talk about this advanced topics later.
 * How a `struct` variable works.
+* How a `struct` pointer variable works.
+* Comment: in case of pointers the field access uses `->` instead of `.` to enhance readability:
+make explicit the fact that we are dealing with a pointer to `struct` variable instead of simple
+`struct` variable, even if a compiler could infer this.
