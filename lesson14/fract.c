@@ -3,14 +3,17 @@
 
 /* Internal layout:
  *
- * +----+----+-+
- * |num |den |c|
- * +----+----+-+
+ * +----+----+----+
+ * |num |den |abcd|
+ * +----+----+----+
  */
 struct fract {
     int num;
     int den;
-    unsigned char color;
+    unsigned char a;
+    unsigned char b;
+    unsigned char c;
+    unsigned char d;
 };
 
 /* The function returns NULL if there's no memory else it returns the fraction 'object' */

@@ -18,3 +18,4 @@ a multiple of four so there are 3 bytes of padding.
   * No, is still 12 because the `struct` has the guarantee that is aligned to the greater
 field among its fields.
     * This guarantee is necessary because I can declare an array of structures.
+* An example of a well designed `struct` with no holes in it. The size is 12.
