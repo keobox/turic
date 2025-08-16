@@ -7,47 +7,38 @@ struct fract {
 };
 
 /* The function returns NULL if there's no memory else it returns the fraction 'object' */
-int *create_fraction(int num, int den) {
-    int *f = malloc(sizeof(int)*2);
+struct fract *create_fraction(int num, int den) {
+    // struct fract *f = malloc(sizeof(struct fract));
+    // below line is equal to above line
+    struct fract *f = malloc(sizeof(*f));
     // malloc error checking
     if (f == NULL) return NULL;
-    f[0] = num;
-    f[1] = den;
+    f->num = num;
+    f->den = den;
     return f;
 }
 
-void print_fraction(int *f) {
-    printf("%d/%d\n", f[0], f[1]);
+void print_fraction(struct fract *f) {
+    printf("%d/%d\n", f->num, f->den);
 }
 
 /* Semplify the fraction */
-void semplify_fraction(int *f) {
-    for (int d = 2; d <= f[0] && d <= f[1]; d++) {
-        while (f[0] % d == 0 &&
-               f[1] % d == 0) {
-            f[0] /= d;
-            f[1] /= d;
+void semplify_fraction(struct fract *f) {
+    for (int d = 2; d <= f->num && d <= f->den; d++) {
+        while (f->num % d == 0 &&
+               f->den % d == 0) {
+            f->num /= d;
+            f->den /= d;
         }
     }
 }
 
 int main(void) {
-    printf("%d\n", (int) sizeof(struct fract));
-
-    struct fract a;
-    struct fract *b;
-    b = &a;
-    b->num = 1;
-    b->den = 2;
-    printf("%d/%d\n", a.num, a.den);
-
-#if 0
-    int *f1 = create_fraction(10, 20);
-    int *f2 = create_fraction(3, 4);
+    struct fract *f1 = create_fraction(10, 20);
+    struct fract *f2 = create_fraction(3, 4);
     // Should check f1, f2 for NULL
     semplify_fraction(f1);
     print_fraction(f1);
     print_fraction(f2);
-#endif
     return 0;
 }

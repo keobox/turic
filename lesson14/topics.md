@@ -28,3 +28,4 @@ we will talk about this advanced topics later.
 * Comment: in case of pointers the field access uses `->` instead of `.` to enhance readability:
 make explicit the fact that we are dealing with a pointer to `struct` variable instead of simple
 `struct` variable, even if a compiler could infer this.
+* Refactor the program to use a `struct` type for fractions handling.
