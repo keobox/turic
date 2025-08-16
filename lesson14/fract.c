@@ -3,9 +3,9 @@
 
 /* Internal layout:
  *
- * +-+----+----+
- * |c|num |den |
- * +-+----+----+
+ * +----+----+----+
+ * |cPPP|num |den |
+ * +----+----+----+
  */
 struct fract {
     unsigned char color;
