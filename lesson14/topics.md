@@ -8,3 +8,6 @@
 * Add basic function for frations handling.
 * Refactor `set_fraction` to `create_fraction`.
 * Write a fraction semplification function.
+* Is possible to refactor using a struct: an aggregated data type.
+* But before a digression about `struct' dimension.
+  * The `struct` dimension is 8 bytes as expected.

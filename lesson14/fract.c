@@ -1,6 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Internal layout:
+ *
+ * +----+----+
+ * |num |den |
+ * +----+----+
+ */
+struct fract {
+    int num;
+    int den;
+};
+
 /* The function returns NULL if there's no memory else it returns the fraction 'object' */
 int *create_fraction(int num, int den) {
     int *f = malloc(sizeof(int)*2);
@@ -27,11 +38,14 @@ void semplify_fraction(int *f) {
 }
 
 int main(void) {
+    printf("%d\n", (int) sizeof(struct fract));
+#if 0
     int *f1 = create_fraction(10, 20);
     int *f2 = create_fraction(3, 4);
     // Should check f1, f2 for NULL
     semplify_fraction(f1);
     print_fraction(f1);
     print_fraction(f2);
+#endif
     return 0;
 }
