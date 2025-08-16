@@ -19,3 +19,7 @@ a multiple of four so there are 3 bytes of padding.
 field among its fields.
     * This guarantee is necessary because I can declare an array of structures.
 * An example of a well designed `struct` with no holes in it. The size is 12.
+  * But in case we create holes the memory aligment on the bigger field will happen.
+Now `struct` size is 20 due to memory aligment.
+* In reality is possible to avoid memory aligment problem via `bitfields` and `packed struct`,
+we will talk about this advanced topics later.

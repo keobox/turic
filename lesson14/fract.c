@@ -8,10 +8,10 @@
  * +----+----+----+
  */
 struct fract {
-    int num;
-    int den;
     unsigned char a;
+    int num;
     unsigned char b;
+    int den;
     unsigned char c;
     unsigned char d;
 };
