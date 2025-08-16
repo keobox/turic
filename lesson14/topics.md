@@ -14,3 +14,4 @@
   * What is we add an unsigned byte before the 2 int fields? Is the dimension 9 bytes?
   * No, the dimension is 12 because of the memory alignment, every field's address is
 a multiple of four so there are 3 bytes of padding.
+  * What if we add the littler `char` field at the end of the `struct`, will the size be 9?
