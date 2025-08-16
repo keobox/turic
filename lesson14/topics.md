@@ -23,3 +23,4 @@ field among its fields.
 Now `struct` size is 20 due to memory aligment.
 * In reality is possible to avoid memory aligment problem via `bitfields` and `packed struct`,
 we will talk about this advanced topics later.
+* How a `struct` variable works.

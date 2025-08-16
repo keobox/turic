@@ -1,19 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Internal layout:
- *
- * +----+----+----+
- * |num |den |abcd|
- * +----+----+----+
- */
 struct fract {
-    unsigned char a;
     int num;
-    unsigned char b;
     int den;
-    unsigned char c;
-    unsigned char d;
 };
 
 /* The function returns NULL if there's no memory else it returns the fraction 'object' */
@@ -43,6 +33,12 @@ void semplify_fraction(int *f) {
 
 int main(void) {
     printf("%d\n", (int) sizeof(struct fract));
+
+    struct fract a;
+    a.num = 1;
+    a.den = 2;
+    printf("%d/%d\n", a.num, a.den);
+
 #if 0
     int *f1 = create_fraction(10, 20);
     int *f2 = create_fraction(3, 4);
