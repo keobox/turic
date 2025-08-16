@@ -15,3 +15,6 @@
   * No, the dimension is 12 because of the memory alignment, every field's address is
 a multiple of four so there are 3 bytes of padding.
   * What if we add the littler `char` field at the end of the `struct`, will the size be 9?
+  * No, is still 12 because the `struct` has the guarantee that is aligned to the greater
+field among its fields.
+    * This guarantee is necessary because I can declare an array of structures.
