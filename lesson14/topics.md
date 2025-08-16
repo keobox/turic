@@ -29,3 +29,8 @@ we will talk about this advanced topics later.
 make explicit the fact that we are dealing with a pointer to `struct` variable instead of simple
 `struct` variable, even if a compiler could infer this.
 * Refactor the program to use a `struct` type for fractions handling.
+* In C is possible to return a `struct`.
+  * This is important since it is a proof that structs are actual types not just packed fields accessible using offsets.
+  * Warning: in this case there's an implicit fields copy in `main` when `create_fraction` is called, this can
+impact program efficiency even if is more elegant.
+  * In reality returning a `struct` by value is not a good practice: is not efficient especially if the struct size grows.

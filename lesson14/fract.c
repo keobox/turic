@@ -6,15 +6,11 @@ struct fract {
     int den;
 };
 
-/* The function returns NULL if there's no memory else it returns the fraction 'object' */
-struct fract *create_fraction(int num, int den) {
-    // struct fract *f = malloc(sizeof(struct fract));
-    // below line is equal to above line
-    struct fract *f = malloc(sizeof(*f));
-    // malloc error checking
-    if (f == NULL) return NULL;
-    f->num = num;
-    f->den = den;
+/* The function returns a fract struct */
+struct fract create_fraction(int num, int den) {
+    struct fract f;
+    f.num = num;
+    f.den = den;
     return f;
 }
 
@@ -34,11 +30,10 @@ void semplify_fraction(struct fract *f) {
 }
 
 int main(void) {
-    struct fract *f1 = create_fraction(10, 20);
-    struct fract *f2 = create_fraction(3, 4);
-    // Should check f1, f2 for NULL
-    semplify_fraction(f1);
-    print_fraction(f1);
-    print_fraction(f2);
+    struct fract f1 = create_fraction(10, 20);
+    struct fract f2 = create_fraction(3, 4);
+    semplify_fraction(&f1);
+    print_fraction(&f1);
+    print_fraction(&f2);
     return 0;
 }
