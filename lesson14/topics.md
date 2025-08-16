@@ -11,3 +11,4 @@
 * Is possible to refactor using a struct: an aggregated data type.
 * But before a digression about `struct' dimension.
   * The `struct` dimension is 8 bytes as expected.
+  * What is we add an unsigned byte before the 2 int fields? Is the dimension 9 bytes?

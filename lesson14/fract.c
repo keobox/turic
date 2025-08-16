@@ -3,11 +3,12 @@
 
 /* Internal layout:
  *
- * +----+----+
- * |num |den |
- * +----+----+
+ * +-+----+----+
+ * |c|num |den |
+ * +-+----+----+
  */
 struct fract {
+    unsigned char color;
     int num;
     int den;
 };
