@@ -11,6 +11,11 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    char buf[1024];
+    while(fgets(buf, sizeof(buf), fp) != NULL) {
+        printf("%s", buf);
+    }
+
     fclose(fp);
     return 0;
 }

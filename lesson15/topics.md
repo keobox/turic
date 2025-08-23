@@ -5,3 +5,4 @@
 * Explain program `args`.
 * Explain the `FILE` C API: file pointers and `fopen`.
   * `man fopen`.
+* Explain the `fgets` function for reading the lines of a file.
