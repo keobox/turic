@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define BUF_LEN 1024
+
 struct line {
     char *s;
     struct line *next;
@@ -18,17 +20,21 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    char buf[1024];
+    char buf[BUF_LEN];
     struct line *head = NULL;
     while(fgets(buf, sizeof(buf), fp) != NULL) {
         /* the malloc return value should be checked for NULL:
            memory error */
         struct line *l = malloc(sizeof(struct line));
-        size_t linelen = strlen(buf);
-        l->s = malloc(linelen + 1);
+        size_t linelen = strnlen(buf, BUF_LEN);
+        l->s = malloc(linelen);
         /* the string copy can be done with memcpy */
-        for(size_t j = 0; j <= linelen; j++) {
+        for (size_t j = 0; j < linelen; j++) {
             l->s[j] = buf[j];
+        }
+        if (linelen == BUF_LEN) {
+          /* since buffers are not zerod with memset */
+          l->s[BUF_LEN] = '\0';
         }
         l->next = head;
         head = l;

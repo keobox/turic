@@ -11,3 +11,4 @@ in reverse order.
 * A last comment: in this case we wrote a `Linked List` abstraction and
 a O(N) algorithm to print in reverse but using a O(N) memory where
 N is the lines number.
+* My change: be defensive against buffer overflow.
