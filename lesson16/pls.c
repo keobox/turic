@@ -5,6 +5,7 @@
 struct pls {
     uint32_t len;
     uint32_t refcount;
+    uint32_t magic;
     char str[];
 };
 
@@ -31,6 +32,7 @@ char *ps_create(char *init, uint32_t len) {
     struct pls *p = malloc(sizeof(struct pls)+ len + 1);
     p->len = len;
     p->refcount = 1;
+    p->magic = 0xDEADBEEF;
 
     // write the rest
     for (uint32_t j = 0; j < len ; j++) {
@@ -62,16 +64,23 @@ void ps_free(char *s) {
     free(s - sizeof(struct pls));
 }
 
+/* Checks the magic field */
+void ps_validate(struct pls *p) {
+    if (p->magic != 0xDEADBEEF) {
+        printf("INVALID STRING: Aborting\n");
+        exit(1);
+    }
+}
+
 /* Dealloc the string in case there are no more references to it.
 */
 void ps_release(char *s) {
     struct pls *p = (struct pls *) (s - sizeof(*p));
-    if (p->refcount == 0) {
-        printf("ABORTED ON FREE ERROR.");
-        exit(1);
-    }
+    ps_validate(p);
+
     p->refcount--;
     if (p->refcount == 0) {
+        p->magic = 0;
         ps_free(s);
     }
 }
@@ -81,10 +90,10 @@ void ps_release(char *s) {
 void ps_retain(char *s) {
     struct pls *p = (struct pls *) (s - sizeof(*p));
     if (p->refcount == 0) {
-        printf("ABORTED ON RETAIN OF ILLEGAL STRING.");
+        printf("ABORTED ON RETAIN OF ILLEGAL STRING.\n");
         exit(1);
     }
-    p->refcount++; 
+    p->refcount++;
 }
 
 /* Returns the string's length in O(1) */
@@ -105,5 +114,7 @@ int main(void) {
     ps_release(mystr);
     printf("%s\n", global_string);
     ps_release(global_string);
+    /* simulate free error */
+    // ps_release(mystr);
     return 0;
 }
