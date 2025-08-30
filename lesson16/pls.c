@@ -5,7 +5,6 @@
 struct pls {
     uint32_t len;
     uint32_t refcount;
-    uint32_t magic;
     char str[];
 };
 
@@ -32,7 +31,6 @@ char *ps_create(char *init, uint32_t len) {
     struct pls *p = malloc(sizeof(struct pls)+ len + 1);
     p->len = len;
     p->refcount = 1;
-    p->magic = 0xDEADBEEF;
 
     // write the rest
     for (uint32_t j = 0; j < len ; j++) {
@@ -45,6 +43,7 @@ char *ps_create(char *init, uint32_t len) {
 /* Display the string s on the screen.
  */
 void ps_print(char *s) {
+    if (s == NULL) return;
     /* For backward compatibility with C standard strings
        pls.str is returned by ps_create but we know that
        struct pls is the "header" of a prefixed length string
@@ -59,45 +58,45 @@ void ps_print(char *s) {
     printf("\n");
 }
 
+#define PLS_DEBUG
+
 /* Dealloc a prefixed length string */
 void ps_free(char *s) {
+    if (s == NULL) return;
+#ifdef PLS_DEBUG
+    printf("Free the string\n");
+#endif
     free(s - sizeof(struct pls));
 }
 
-/* Checks the magic field */
-void ps_validate(struct pls *p) {
-    if (p->magic != 0xDEADBEEF) {
-        printf("INVALID STRING: Aborting\n");
-        exit(1);
-    }
-}
-
 /* Dealloc the string in case there are no more references to it.
+   Use a double pointer so that is possible to set to null the
+   caller's pointer to string.
 */
-void ps_release(char *s) {
-    struct pls *p = (struct pls *) (s - sizeof(*p));
-    ps_validate(p);
+void ps_release(char **sp) {
+    if (*sp == NULL) return;
 
+    struct pls *p = (struct pls *) (*sp - sizeof(*p));
     p->refcount--;
     if (p->refcount == 0) {
-        p->magic = 0;
-        ps_free(s);
+        ps_free(*sp);
     }
+    /* set caller pointer to NULL */
+    *sp = NULL;
 }
 
 /* Increments the counter
 */
 void ps_retain(char *s) {
+    if (s == NULL) return;
+
     struct pls *p = (struct pls *) (s - sizeof(*p));
-    if (p->refcount == 0) {
-        printf("ABORTED ON RETAIN OF ILLEGAL STRING.\n");
-        exit(1);
-    }
     p->refcount++;
 }
 
 /* Returns the string's length in O(1) */
 uint32_t ps_len(char *s) {
+    if (s == NULL) return 0;
     struct pls *p = (struct pls *) (s - sizeof(*p));
     return p->len;
 }
@@ -111,10 +110,18 @@ int main(void) {
     ps_print(mystr);
     ps_print(mystr);
     printf("%s %d\n", mystr, (int)ps_len(mystr));
-    ps_release(mystr);
+    ps_release(&mystr);
+    printf("mystr addr %p\n", mystr);
     printf("%s\n", global_string);
-    ps_release(global_string);
-    /* simulate free error */
-    // ps_release(mystr);
+    ps_release(&global_string);
+    printf("global_string addr %p\n", global_string);
+    /* simulate double free errors */
+    ps_release(&mystr);
+    ps_release(&global_string);
+    /* check robustness */
+    ps_print(mystr);
+    ps_len(mystr);
+    ps_retain(global_string);
+    ps_free(global_string);
     return 0;
 }
