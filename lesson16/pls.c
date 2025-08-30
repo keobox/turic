@@ -20,11 +20,12 @@
  */
 
 char *ps_create(char *init, uint32_t len) {
-    char *s = malloc(4 + len + 1);
+    char *s = malloc(8 + len + 1);
     uint32_t *lenptr = (uint32_t *) s;
-    // write the length in the first 4 bytes
+    uint32_t *count = (uint32_t *)(s + 4);
     *lenptr = len;
-    s += 4;
+
+    s += 8;
     // write the rest
     for (uint32_t j = 0; j < len ; j++) {
         s[j] = init[j]; // FIXME use memcopy
