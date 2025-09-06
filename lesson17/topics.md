@@ -11,3 +11,12 @@ contexts.
 * Back to `char str[20]` it's just a reference of the end of the struct in fact
 has just 8 bytes of offset from the beginning of the struct because `len` is 8 bytes.
   * 20 means there are 20 chars more after `len`.
+* Comments:
+  * Reference counting should be used to an higher level like redisObject in server.h.
+  * Using `uint32_t` as `len` limits to 4G strings? Yes.
+    * For a better implementation look at sds.h that has different headers for different string lengths.
+  * `refcount` is 4 bytes can this overflow? Yes.
+    * A safeguard is to set `refcount` to max and don't touch it anymore in case the max value
+is reached. It's a leak but saves the day.
+    * Set refcount to max and don't touch it for "internalized" strings:
+preallocate these kind of strings.
