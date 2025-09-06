@@ -8,3 +8,6 @@ there's no equivalence among `char *s` and `char s[]` like in other
 contexts.
 * Complete the `hexdump` function using the ternary operator.
 * A battled tested `hexdump` function from the future.
+* Back to `char str[20]` it's just a reference of the end of the struct in fact
+has just 8 bytes of offset from the beginning of the struct because `len` is 8 bytes.
+  * 20 means there are 20 chars more after `len`.

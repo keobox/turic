@@ -39,6 +39,7 @@ int main(void) {
     /* memset(&s, 0xFF, sizeof(s)); */
     s.len = 10;
     memcpy(s.str, "1234567890", 11);
+    printf("%p\n", &s);
     printf("%p\n", s.str);
     hexdump(&s, sizeof(s));
     return 0;
