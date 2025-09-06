@@ -7,3 +7,4 @@ integer followed by 20 chars. No pointer is present. So, in this case,
 there's no equivalence among `char *s` and `char s[]` like in other
 contexts.
 * Complete the `hexdump` function using the ternary operator.
+* A battled tested `hexdump` function from the future.

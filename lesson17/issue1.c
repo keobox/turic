@@ -8,13 +8,19 @@ struct pls {
     char str[20];
 };
 
-#define HEXDUMP_CHARS_PER_LINE 16
+#define HEXDUMP_CHARS_PER_LINE 8
 void hexdump(void *p, size_t len) {
    unsigned char *byte = p;
    size_t po = 0;
    for (size_t j = 0; j < len; j++) {
        printf("%02X ", byte[j]);
        if ((j+1) % HEXDUMP_CHARS_PER_LINE == 0 || j == len-1) {
+           if (j == len-1) {
+               int pad = HEXDUMP_CHARS_PER_LINE -
+                   (len % HEXDUMP_CHARS_PER_LINE);
+               pad %= HEXDUMP_CHARS_PER_LINE;
+               for (int i = 0; i < pad; i++) printf("~~ ");
+           }
            printf("\t");
            for (size_t i = po; i <= j ; i++) {
                /* isprint = is_printable */
