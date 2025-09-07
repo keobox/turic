@@ -20,3 +20,4 @@ has just 8 bytes of offset from the beginning of the struct because `len` is 8 b
 is reached. It's a leak but saves the day.
     * Set refcount to max and don't touch it for "internalized" strings:
 preallocate these kind of strings.
+* My take on using str[] instead of str[20], the offset nature of str is the same as before.

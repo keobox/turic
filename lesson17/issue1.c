@@ -5,7 +5,7 @@
 
 struct pls {
     long len;
-    char str[20];
+    char str[];
 };
 
 #define HEXDUMP_CHARS_PER_LINE 8
@@ -33,14 +33,18 @@ void hexdump(void *p, size_t len) {
    }
 }
 
+# define LEN 10
 int main(void) {
-    struct pls s;
+    struct pls *s = malloc(sizeof(*s) + LEN + 1);
 
-    /* memset(&s, 0xFF, sizeof(s)); */
-    s.len = 10;
-    memcpy(s.str, "1234567890", 11);
-    printf("%p\n", &s);
-    printf("%p\n", s.str);
-    hexdump(&s, sizeof(s));
+    if (NULL == s) {
+        perror("malloc failed\n");
+        return 1;
+    }
+    s->len = LEN;
+    memcpy(s->str, "1234567890", LEN + 1);
+    printf("%p\n", s);
+    printf("%p\n", s->str);
+    hexdump(s, sizeof(*s) + LEN + 1);
     return 0;
 }
