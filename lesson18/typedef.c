@@ -5,10 +5,13 @@ typedef struct {
     int d;
 } fract;
 
+typedef fract *fractptr;
+
 int main(void) {
     fract f;
+    fractptr fp = &f;
     f.n = 10;
     f.d = 20;
-    printf("%d/%d\n", f.n, f.d);
+    printf("%d/%d my fraction is stored at %p\n", fp->n, fp->d, fp);
     return 0;
 }
