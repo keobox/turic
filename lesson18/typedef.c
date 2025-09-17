@@ -1,13 +1,14 @@
 #include <stdio.h>
 
-/* errorcode is an int alias */
-typedef int errorcode;
+typedef struct {
+    int n;
+    int d;
+} fract;
 
-errorcode foo(void) {
-    return -20;
-}
 int main(void) {
-    errorcode a = foo();
-    printf("%d\n", a);
+    fract f;
+    f.n = 10;
+    f.d = 20;
+    printf("%d/%d\n", f.n, f.d);
     return 0;
 }
