@@ -11,3 +11,5 @@ expose just the pointer (or handle) of an object.
 we don't know what exactly is the `FILE *` type but we can operate on it.
 * `fread` read from a file. Is not a great API example at least nowadays.
   * man `fread`.
+* Read and analize `stdio1.c` file itself.
+  * Not much different from `hexdump -C stdio1.c`.

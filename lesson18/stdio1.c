@@ -34,8 +34,13 @@ int main(void) {
         return 1;
     }
     char buf[32];
-    size_t nread = fread(buf, 1, sizeof(buf), fp);
-    hexdump(buf, nread);
+    size_t nread;
+    while (1) {
+        nread = fread(buf, 1, sizeof(buf), fp);
+        if (nread == 0)
+            break;
+        hexdump(buf, nread);
+    }
     printf("%zd\n", nread);
     fclose(fp);
     return 0;
