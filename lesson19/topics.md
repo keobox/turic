@@ -8,3 +8,7 @@
   * returns a number: a file descriptor.
   * `fopen` is a wrapper.
   * We do not want to use this wrapper anymore.
+* The UNIX, POSIX complean system call is `open`.
+  * `man 2 open`.
+  * Explanation of more important flags to open a file, like `O_RDONLY` etc..
+  * Flags are a bitmask.
