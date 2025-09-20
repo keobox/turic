@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <fcntl.h>
+#include <errno.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -33,6 +34,7 @@ int main(void) {
     /* Use the standard posix function to open a file,
        it returns the file descriptor as integer or -1 */
     int fd = open("stdio3.c", O_RDONLY);
+    printf("Error number is %d %d\n", errno, ENOENT);
     if (fd == -1) {
         perror("Unable to open the file");
         return 1;

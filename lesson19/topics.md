@@ -12,3 +12,8 @@
   * `man 2 open`.
   * Explanation of more important flags to open a file, like `O_RDONLY` etc..
   * Flags are a bitmask.
+* Introducing `errno` and explain what `perror` does.
+  * `errno` is a global, thread-local variable that contains the occurred error code.
+  * `man 2 open` at the end of the man all the possible error code about open
+are listed.
+  * Prove that a failed open cause errono to be equal to `ENOENT`.
