@@ -39,19 +39,20 @@ int main(void) {
         perror("Unable to open the file");
         return 1;
     }
-    close(fd);
 
-#if 0
     char buf[32];
-    size_t nread;
+    /* is a 64-bit system this is 2^63 max */
+    ssize_t nread;
     while (1) {
-        nread = fread(buf, 1, sizeof(buf), fp);
+        nread = read(fd, buf, sizeof(buf));
+        if (nread == -1) {
+            perror("Error reading file");
+            return 1;
+        }
         if (nread == 0)
             break;
         hexdump(buf, nread);
     }
-    printf("%zd\n", nread);
-    fclose(fp);
-#endif
+    close(fd);
     return 0;
 }

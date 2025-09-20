@@ -20,3 +20,17 @@ are listed.
   * Prove that when open succeded errno is zero.
   * the `perror` function translates the errno value in a string.
 `Unable to open the file: No such file or directory`
+* Our program runs in `user space` (and in a virtual memory) so has
+his own address space, but the kernel, that runs in `kernel space`,
+has a way to take a pointer in `user space` and copy into it
+something that is in `kernel space`.
+  * (Wikipedia)[https://en.wikipedia.org/wiki/User_space_and_kernel_space]
+  * The system call that does this is `read`.
+  * `man 2 read`.
+  * `read` returns `ssize_t` that is the signed version of `size_t`,
+because it can return -1, like all system calls.
+  * The opher paramenter are:
+    * The file descriptor, a pointer to the memory to write into and
+`nbyte` is the maximum nember of bytes to read, but there's no guarantee
+that this exact number of bytes will be read, since `read` can operate
+on a TCP socket, not only a file.
