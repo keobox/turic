@@ -34,3 +34,12 @@ because it can return -1, like all system calls.
 `nbyte` is the maximum nember of bytes to read, but there's no guarantee
 that this exact number of bytes will be read, since `read` can operate
 on a TCP socket, not only a file.
+* The system call to write is `write`.
+  * `man 2 write`.
+  * `write` could be used to print stuff in standard output `stdout`
+but this can be overkill.
+* HOMEWORK: read this man pages:
+  * `man 2 read`
+  * `man 2 write`
+  * `man 2 open`
+  * Better to read the `Linux` man pages on web.
