@@ -33,7 +33,7 @@ void hexdump(void *p, size_t len) {
 int main(void) {
     /* Use the standard posix function to open a file,
        it returns the file descriptor as integer or -1 */
-    int fd = open("stdio3.c", O_RDONLY);
+    int fd = open("stdio2.c", O_RDONLY);
     printf("Error number is %d %d\n", errno, ENOENT);
     if (fd == -1) {
         perror("Unable to open the file");

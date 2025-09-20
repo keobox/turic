@@ -17,3 +17,6 @@
   * `man 2 open` at the end of the man all the possible error code about open
 are listed.
   * Prove that a failed open cause errono to be equal to `ENOENT`.
+  * Prove that when open succeded errno is zero.
+  * the `perror` function translates the errno value in a string.
+`Unable to open the file: No such file or directory`
