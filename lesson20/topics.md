@@ -22,3 +22,5 @@ is expensive. Even if in modern systems this is mitigated.
   * So Libc tries to optimize this situation with `buffering`.
   * We can use `putchar` but buffering is still there.
   * So we avoid to call a sys call for every char.
+  * If we use `write` sys call for every char the buffering
+is avoided.
