@@ -44,3 +44,17 @@ is possible to be much worse than `fgets`.
 * Another thing to consider is **portability** a program
 that uses only Libc can be compiled on many platform if
 these platforms have an `ANSI C` compiler.
+* Warning: often, for doing advanced stuff is necessary to use
+sys calls.
+* We said before that a process can communicate with outside
+using the sys calls of the kernel.
+  * But there is has another possibility to communicate with the
+outside: using the fact a process has the capability to read and
+write memory.
+  * This is still used in microcontrollers to control memory
+mapped devices.
+  * To elaborate this, in UNIX there's a POSIX sys call: `mmap`
+that can map the content of a file in the memory space of
+the process. So I can read the content via a pointer.
+  * `man mmap`.
+  * Change `stdio3.c` to load itself into a memory mapped file.
