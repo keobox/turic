@@ -20,3 +20,5 @@ something strange happens.
 with the Kernel space, in general calling a sys call
 is expensive. Even if in modern systems this is mitigated.
   * So Libc tries to optimize this situation with `buffering`.
+  * We can use `putchar` but buffering is still there.
+  * So we avoid to call a sys call for every char.
