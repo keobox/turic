@@ -24,3 +24,6 @@ is expensive. Even if in modern systems this is mitigated.
   * So we avoid to call a sys call for every char.
   * If we use `write` sys call for every char the buffering
 is avoided.
+* NOTE: the '\n' char has the property to trigger a "flush"
+of the buffer in Libc, so we can have the same behaviour of
+using a `write` with `putchar` Libc function.

@@ -6,7 +6,8 @@ int main(void) {
     char *mystr = "Hello World";
     size_t len = strlen(mystr);
     for (size_t j=0; j < len; j++)
-        write(STDOUT_FILENO, &mystr[j], 1);
+        putchar(mystr[j]);
+    putchar('\n');
     sleep(5);
     return 0;
 }
