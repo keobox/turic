@@ -7,7 +7,7 @@ int main(void) {
     size_t len = strlen(mystr);
     for (size_t j=0; j < len; j++)
         putchar(mystr[j]);
-    putchar('\n');
+    fflush(stdout);
     sleep(5);
     return 0;
 }

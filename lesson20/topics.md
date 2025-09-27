@@ -27,3 +27,5 @@ is avoided.
 * NOTE: the '\n' char has the property to trigger a "flush"
 of the buffer in Libc, so we can have the same behaviour of
 using a `write` with `putchar` Libc function.
+  * Or we can use the `fflush` Libc function to force the
+flush of the buffer.
