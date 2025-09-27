@@ -29,3 +29,18 @@ of the buffer in Libc, so we can have the same behaviour of
 using a `write` with `putchar` Libc function.
   * Or we can use the `fflush` Libc function to force the
 flush of the buffer.
+* Add a nice effect to `stdio3.c`.
+* So, in general program written by Libc are more performant,
+because of the buffering.
+  * But there are cases where you want to write an ad hoc
+buffering to be even more efficient, in the case use the
+sys calls, but you have to handle your ad hoc buffering.
+* This buffering is present also during reading from a file.
+* For example the `fgets` Libc function is capable to read
+from a text file line per line, and flush the buffer when
+a newline is hit.
+  * So a trivial usage of `read` to implent this "line read"
+is possible to be much worse than `fgets`.
+* Another thing to consider is **portability** a program
+that uses only Libc can be compiled on many platform if
+these platforms have an `ANSI C` compiler.

@@ -5,9 +5,12 @@
 int main(void) {
     char *mystr = "Hello World";
     size_t len = strlen(mystr);
-    for (size_t j=0; j < len; j++)
+    for (size_t j=0; j < len; j++) {
         putchar(mystr[j]);
-    fflush(stdout);
+        fflush(stdout);
+        /* Wait 5 seconds */
+        usleep(100000);
+    }
     sleep(5);
     return 0;
 }
