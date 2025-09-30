@@ -58,3 +58,15 @@ that can map the content of a file in the memory space of
 the process. So I can read the content via a pointer.
   * `man mmap`.
   * Change `stdio3.c` to load itself into a memory mapped file.
+* Now change the code in `stdio3.c` to access the file just like
+we access and array in memory.
+* The use of `mmap` is the fasted possible way to access files.
+* Basically with mmap a page of memory, with file content, is
+copied into a process' memory page.
+* Warning: a process's memory page can be written out to a file
+using a different sys call.
+  * So, use use case is: I can do a lot of operations in this
+memory mapped file without using sys calls or the general purpose
+buffering system of Libc, then write just once the file with
+just one call to a sys call.
+* An idea to use `mmap`: write a memory mapped `grep` command.
