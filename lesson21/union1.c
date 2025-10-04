@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Layout IIIIAAAA 8 bytes */
+/* Layout IIII or AAAA 4 bytes
+   i and a share the same address
+   refer to the same memory space
+   in 2 different ways. */
 
 struct foo {
-    int i;
-    unsigned char a[4];
+    union {
+        int i;
+        unsigned char a[4];
+    };
 };
 
 int main(void) {
     struct foo f;
 
     f.i = 10;
-    memcpy(f.a, "abcd", 4);
-    printf("%d %d\n", f.i, f.a[2]);
+    printf("%d [%d %d %d %d]\n", f.i, f.a[0], f.a[1], f.a[2], f.a[3]);
     return 0;
 }
