@@ -17,7 +17,7 @@ struct foo {
 int main(void) {
     struct foo f;
 
-    f.i = INT_MAX;
+    f.i = INT_MIN;
     printf("%d [%d %d %d %d]\n", f.i, f.a[0], f.a[1], f.a[2], f.a[3]);
     return 0;
 }
