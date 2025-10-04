@@ -18,3 +18,4 @@ the first.
 only one of the fields is used in an `exprtoken`.
   - So the use case for a `union` is to save memory in case just one
 field is used in a `struct`.
+- Using `bitfields` in a struct.

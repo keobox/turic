@@ -2,22 +2,18 @@
 #include <string.h>
 #include <limits.h>
 
-/* Layout IIII or AAAA 4 bytes
-   i and a share the same address
-   refer to the same memory space
-   in 2 different ways. */
+/* These field should cost just 2 bytes
+   because the number after ':' is the number
+   of bits of the fields = 16 bits = 2 bytes */
 
 struct foo {
-    union {
-        int i;
-        unsigned char a[4];
-    };
+    unsigned char a:4;
+    unsigned char b:4;
+    unsigned char c:8;
 };
 
 int main(void) {
     struct foo f;
-
-    f.i = -1;
-    printf("%d [%d %d %d %d]\n", f.i, f.a[0], f.a[1], f.a[2], f.a[3]);
+    printf("%zu\n", sizeof(f));
     return 0;
 }
