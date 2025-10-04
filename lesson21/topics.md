@@ -7,3 +7,4 @@
 a byte representation, note that if `10` is the first number
 then the CPU is `little endian` the least significative byte is
 the first.
+- Use a larger number to see what happens in the byte representation.
