@@ -57,3 +57,23 @@ struct iphdr
     /*The options start here. */
   };
 ```
+- Showed the code of `redis/src/server.h` `redisObject` is using bitfields.
+```c
+struct redisObject {
+    unsigned type:4;
+    unsigned encoding:4;
+    unsigned lru:LRU_BITS; /* LRU time (relative to global lru_clock) or
+                            * LFU data (least significant 8 bits frequency
+                            * and most significant 16 bits access time). */
+    unsigned iskvobj : 1;   /* 1 if this struct serves as a kvobj base */
+    unsigned expirable : 1; /* 1 if this key has expiration time attached.
+                             * If set, then this object is of type kvobj */
+    unsigned refcount : OBJ_REFCOUNT_BITS;
+    void *ptr;
+};
+```
+- NOTE: the `unsigned` fields defaults to `unsigned int`.
+  - Even if the `type` field is `int` the bitfield notation applies
+to the overall struct, does not mean that, for example `type`
+is 32 bits and use just 4 so the bitfields are instructions
+about how to pack the fields in a 32 bits contiguous space.
