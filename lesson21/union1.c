@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <string.h>
 
-/* Layout IIIIAAAA */
+/* Layout IIIIAAAA 8 bytes */
 
 struct foo {
     int i;
@@ -8,9 +9,10 @@ struct foo {
 };
 
 int main(void) {
-    /* Possible initialization but not so used */
-    struct foo f = {10, {1, 2, 3, 4}};
-    
+    struct foo f;
+
+    f.i = 10;
+    memcpy(f.a, "abcd", 4);
     printf("%d %d\n", f.i, f.a[2]);
     return 0;
 }
