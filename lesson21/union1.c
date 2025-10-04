@@ -14,6 +14,10 @@ struct foo {
 
 int main(void) {
     struct foo f;
-    printf("%zu\n", sizeof(f));
+
+    f.a = 1;
+    f.b = 2;
+    f.c = 3;
+    printf("%d %d %d\n", f.a, f.b, f.c);
     return 0;
 }
