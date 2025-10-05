@@ -77,3 +77,7 @@ struct redisObject {
 to the overall struct, does not mean that, for example `type`
 is 32 bits and use just 4 so the bitfields are instructions
 about how to pack the fields in a 32 bits contiguous space.
+- Verify what stated above with an example `union_unsigned.c`.
+  - `unsigned` truly defaults to `unsigned int`.
+  - The packing is on the whole struct so we have truly
+four 8 bits `int` so 32 bits hence `sizeoz(bar)` is 4 bytes.
