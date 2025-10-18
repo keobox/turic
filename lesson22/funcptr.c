@@ -8,14 +8,16 @@ void baubau(void) {
     printf("baubau!\n");
 }
 
+void call_n_times(int n, void(*x)(void)) {
+    while (n--) {
+        x();
+    }
+
+}
 int main (void) {
-    void (*x)(void);
 
-    x = hello;
-    x();
-
-    x = baubau;
-    x();
+    call_n_times(10, hello);
+    call_n_times(10, baubau);
 
     return 0;
 }
