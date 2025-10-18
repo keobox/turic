@@ -9,3 +9,6 @@ This is a very profound abtraction.
 - `man qsort`
 - An useful use case for function pointer: enable gneric `qsort`.
   - `man 3 rand`
+- Check that the function is robust against integer overflow.
+- Cliffhanger: function pointers can be contained in `struct` so something that can
+contain data and code: an object.
