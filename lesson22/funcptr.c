@@ -1,12 +1,21 @@
 #include <stdio.h>
 
+void hello(void) {
+    printf("hello!\n");
+}
+
+void baubau(void) {
+    printf("baubau!\n");
+}
 
 int main (void) {
-    int (*myf)(void);
+    void (*x)(void);
 
-    myf = main;
+    x = hello;
+    x();
 
-    printf("%p\n", main);
-    printf("%p\n", myf);
+    x = baubau;
+    x();
+
     return 0;
 }
