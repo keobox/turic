@@ -16,3 +16,5 @@
   [dup +] ifelse
 ```
 - Comment about `argv[0]` containing the invoked command name.
+- Create a context object for every interpreter instances.
+- Implement the constructor functions.
