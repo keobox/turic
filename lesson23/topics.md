@@ -15,3 +15,4 @@
   [dup *]
   [dup +] ifelse
 ```
+- Comment about `argv[0]` containing the invoked command name.
