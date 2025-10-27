@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define TFOBJ_TYPE_INT 0
 #define TFOBJ_TYPE_STR 1
@@ -22,6 +23,11 @@ typedef struct tfobj {
 	};
 } tfobj;
 
-int main(void) {
+typedef struct tfparser {
+	char *prg; /* The program to compile into a list */
+	char *p; /* The next token to parse */
+} tfparser;
+
+int main(int argc, char **argv) {
 	return 0;
 }
