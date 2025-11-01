@@ -18,3 +18,4 @@ be the beginning of the program and `p` the next token.
     time is O(1), but I have strict O(1) access time and better
     locality.
     - My comment: basically we are using an array list.
+- Implement file size retrieval.

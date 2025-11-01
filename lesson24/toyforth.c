@@ -95,6 +95,12 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
+	FILE *fp = fopen(argv[1], "r");
+	fseek(fp, 0, SEEK_END);
+	long file_size = ftell(fp);
+	printf("Source file size %ld\n", file_size);
+	fclose(fp);
+
 	/* TODO
 	tfobj *prg = compile(prgtext);
 	exec(prgtext); */
