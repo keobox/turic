@@ -87,6 +87,8 @@ tfobj *createListObject(void) {
 	return o;
 }
 
+/* ================ Turn program into toy forth list ================ */
+
 /* =============================== Main ============================= */
 
 int main(int argc, char **argv) {

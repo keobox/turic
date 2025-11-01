@@ -19,3 +19,9 @@ be the beginning of the program and `p` the next token.
     locality.
     - My comment: basically we are using an array list.
 - Implement file size retrieval.
+- Comment on "Cancatenative programming language.
+- Example [Joy Language](https://en.wikipedia.org/wiki/Joy_(programming_language)
+- A Joy interpreter implementation [example](https://wiki.tcl-lang.org/page/A+Joy+implementation+in+Tcl)
+- A comment about the implementation of local variables without
+changing the language's semantics.
+  - Added and example using something like tuples in `program.tf`.
