@@ -95,11 +95,20 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
+	/* Read program in memory for later parsing */
 	FILE *fp = fopen(argv[1], "r");
+	if (NULL == fp) {
+		perror("Opening the Toy Forth program");
+		return 1;
+	}
 	fseek(fp, 0, SEEK_END);
 	long file_size = ftell(fp);
-	printf("Source file size %ld\n", file_size);
+	char *prgtext = xmalloc(file_size + 1);
+	fseek(fp, 0, SEEK_SET);
+	fread(prgtext, file_size, 1, fp);
+	prgtext[file_size] = 0;
 	fclose(fp);
+	printf("Program text: \"%s\"\n", prgtext);
 
 	/* TODO
 	tfobj *prg = compile(prgtext);
