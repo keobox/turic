@@ -25,3 +25,4 @@ be the beginning of the program and `p` the next token.
 - A comment about the implementation of local variables without
 changing the language's semantics.
   - Added and example using something like tuples in `program.tf`.
+  - Added a `swap` implementation using local variables.
