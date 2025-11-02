@@ -26,3 +26,6 @@ be the beginning of the program and `p` the next token.
 changing the language's semantics.
   - Added and example using something like tuples in `program.tf`.
   - Added a `swap` implementation using local variables.
+- Start implementation of the `compile` function: the main job is
+transforming the program in a list.
+- Deepdive into initial parser implementation.

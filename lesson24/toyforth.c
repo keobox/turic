@@ -1,5 +1,7 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 /* ========================= Data Structures ======================== */
@@ -80,6 +82,8 @@ tfobj *createBoolObject(int i) {
 	return o;
 }
 
+/* ============================= List Object ======================== */
+
 tfobj *createListObject(void) {
 	tfobj *o = createObject(TFOBJ_TYPE_LIST);
 	o->list.ele = NULL;
@@ -87,9 +91,94 @@ tfobj *createListObject(void) {
 	return o;
 }
 
+/* Push the new element at the end of the list "l".
+ * It is up to the caller incrementing the reference count of
+ * the element added to the list, if needed
+ * */
+void listPush(tfobj *l, tfobj *ele) {
+	l->list.ele = realloc(l->list.ele, sizeof(tfobj*) * (l->list.len + 1));
+	l->list.ele[l->list.len] = ele;
+	l->list.len++;
+}
+
 /* ================ Turn program into toy forth list ================ */
 
-/* =============================== Main ============================= */
+void parseSpaces(tfparser *parser) {
+	while(isspace(parser->p[0]))
+		parser->p++;
+}
+
+#define MAX_NUM_LEN 128
+
+tfobj *parseNumber(tfparser *parser) {
+	char buf[MAX_NUM_LEN];
+	char *start = parser->p;
+	char *end;
+	if (parser->p[0] == '-') parser->p++;
+	while(parser->p[0] && isdigit(parser->p[0])) {
+		parser->p++;
+	}
+	end = parser->p;
+	int numlen = end - start;
+	if (numlen >= MAX_NUM_LEN) return NULL;
+	memcpy(buf, start, numlen);
+	buf[numlen] = 0;
+	tfobj *o = createIntObject(atoi(buf));
+	return o;
+}
+
+tfobj *compile(char *prg) {
+	tfparser parser;
+	parser.prg = prg;
+	parser.p = prg;
+
+	tfobj *parsed = createListObject();
+
+	while (parser.p[0]) {
+	    tfobj *o;
+		char *token_start = parser.p;
+
+		parseSpaces(&parser);
+		if (parser.p[0] == 0)
+			break; /* End of program */
+		if (isdigit(parser.p[0]) || parser.p[0] == '-') {
+			o = parseNumber(&parser);
+		} else {
+		    o = NULL;
+		}
+
+		/* Check if the current token produced a compilation parsing error */
+		if (o == NULL) {
+			/* FIXME: release parsed here */
+			printf("Syntax error near: %32s ... \n", token_start);
+			return NULL;
+		} else {
+			listPush(parsed, o);
+		}
+	}
+	return parsed;
+}
+
+/* ==================== Execute the Program ========================= */
+
+void exec(tfobj *prg) {
+	printf("[");
+	for (size_t j = 0; j < prg->list.len; j++) {
+		tfobj *o = prg->list.ele[j];
+		switch(o->type) {
+		case TFOBJ_TYPE_INT:
+			printf("%d", o->i);
+			break;
+		default:
+			printf("?");
+			break;
+		}
+		printf(" ");
+	}
+	printf("]\n");
+}
+
+/* ============================ Main ================================ */
 
 int main(int argc, char **argv) {
 	if (argc != 2) {
@@ -112,9 +201,8 @@ int main(int argc, char **argv) {
 	fclose(fp);
 	printf("Program text: \"%s\"\n", prgtext);
 
-	/* TODO
 	tfobj *prg = compile(prgtext);
-	exec(prgtext); */
+	exec(prg);
 
 	return 0;
 }
