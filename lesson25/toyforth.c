@@ -161,21 +161,27 @@ tfobj *compile(char *prg) {
 
 /* ==================== Execute the Program ========================= */
 
-void exec(tfobj *prg) {
-	printf("[");
-	for (size_t j = 0; j < prg->list.len; j++) {
-		tfobj *o = prg->list.ele[j];
-		switch(o->type) {
-		case TFOBJ_TYPE_INT:
-			printf("%d", o->i);
+void print_object(tfobj *o) {
+	switch (o->type) {
+		case TFOBJ_TYPE_LIST:
+			printf("[");
+			for (size_t j = 0; j < o->list.len; j++) {
+				tfobj *ob = o->list.ele[j];
+				switch(ob->type) {
+					case TFOBJ_TYPE_INT:
+						printf("%d", ob->i);
+						break;
+					default:
+						printf("?");
+						break;
+				}
+				printf(" ");
+			}
+			printf("]\n");
 			break;
 		default:
 			printf("?");
-			break;
-		}
-		printf(" ");
 	}
-	printf("]\n");
 }
 
 /* ============================ Main ================================ */
@@ -202,7 +208,7 @@ int main(int argc, char **argv) {
 	printf("Program text: \"%s\"\n", prgtext);
 
 	tfobj *prg = compile(prgtext);
-	exec(prg);
+	print_object(prg);
 
 	return 0;
 }
