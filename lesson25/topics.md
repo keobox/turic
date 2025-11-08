@@ -6,3 +6,9 @@
 - Fix a bug that prevents to use `-` as symbol in `compile`.
 - Add `parseSymbol`.
   - Fix the problem I noted before on `createStringObject`.
+- Cliffhanger for next time:
+  - We are now ready to implement `exec` since we can
+  implement print using `print_obejct`.
+  - Numbers and symbols are enough for execute something
+  - NOTE: using recursive print we can print nested
+  lists easily.
