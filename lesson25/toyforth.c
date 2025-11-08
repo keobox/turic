@@ -59,7 +59,9 @@ tfobj *createObject(int type) {
 
 tfobj *createStringObject(char *s, size_t len) {
 	tfobj *o = createObject(TFOBJ_TYPE_STR);
-	o->str.ptr = s; /* my comment: not a malloc and copy? */
+	o->str.ptr = xmalloc(len + 1);
+	strncpy(o->str.ptr, s, len);
+	o->str.ptr[len] = 0;
 	o->str.len = len;
 	return o;
 }
@@ -127,6 +129,24 @@ tfobj *parseNumber(tfparser *parser) {
 	return o;
 }
 
+/*
+ * Returns true if the character 'c' is one of the characters
+ * accetable for our symbols.
+ */
+int is_symbol_char(char c) {
+	char symchars[] = "+-*/%";
+	return isalpha(c) || strchr(symchars, c) != NULL;
+}
+
+tfobj *parseSymbol(tfparser *parser) {
+	char *start = parser->p;
+	while(parser->p[0] && is_symbol_char(parser->p[0])) {
+		parser->p++;
+	}
+	int len = parser->p - start;
+	return createSymbolObject(start, len);
+}
+
 tfobj *compile(char *prg) {
 	tfparser parser;
 	parser.prg = prg;
@@ -144,8 +164,10 @@ tfobj *compile(char *prg) {
 		if (isdigit(parser.p[0]) ||
 				(parser.p[0] == '-' && isdigit(parser.p[1]))) {
 			o = parseNumber(&parser);
+		} else if (is_symbol_char(parser.p[0])) {
+			o = parseSymbol(&parser);
 		} else {
-		    o = NULL;
+			o = NULL;
 		}
 
 		/* Check if the current token produced a compilation parsing error */
@@ -175,6 +197,9 @@ void print_object(tfobj *o) {
 				printf(" ");
 			}
 			printf("]");
+			break;
+		case TFOBJ_TYPE_SYMBOL:
+			printf("%s", o->str.ptr);
 			break;
 		default:
 			printf("?");
