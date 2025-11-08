@@ -141,7 +141,8 @@ tfobj *compile(char *prg) {
 		parseSpaces(&parser);
 		if (parser.p[0] == 0)
 			break; /* End of program */
-		if (isdigit(parser.p[0]) || parser.p[0] == '-') {
+		if (isdigit(parser.p[0]) ||
+				(parser.p[0] == '-' && isdigit(parser.p[1]))) {
 			o = parseNumber(&parser);
 		} else {
 		    o = NULL;
