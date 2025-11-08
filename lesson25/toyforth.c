@@ -163,21 +163,17 @@ tfobj *compile(char *prg) {
 
 void print_object(tfobj *o) {
 	switch (o->type) {
+		case TFOBJ_TYPE_INT:
+			printf("%d", o->i);
+			break;
 		case TFOBJ_TYPE_LIST:
 			printf("[");
 			for (size_t j = 0; j < o->list.len; j++) {
-				tfobj *ob = o->list.ele[j];
-				switch(ob->type) {
-					case TFOBJ_TYPE_INT:
-						printf("%d", ob->i);
-						break;
-					default:
-						printf("?");
-						break;
-				}
+				tfobj *ele = o->list.ele[j];
+				print_object(ele);
 				printf(" ");
 			}
-			printf("]\n");
+			printf("]");
 			break;
 		default:
 			printf("?");
@@ -209,6 +205,7 @@ int main(int argc, char **argv) {
 
 	tfobj *prg = compile(prgtext);
 	print_object(prg);
+	printf("\n");
 
 	return 0;
 }

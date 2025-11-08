@@ -2,3 +2,4 @@
 
 - This is part 3 of the `toyforth.c` Forth interpreter project.
 - Refactor using a `switch` statement.
+- Adding the int case and refactor `print_object` to use recursion.
