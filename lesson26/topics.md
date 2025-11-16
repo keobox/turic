@@ -18,3 +18,14 @@ field in case of strings in `tfobj`.
 that is our programming language. For now is just a list
 but can be more.
 - Initial implementation of `exec`.
+- Writing the `FuntionTableEntry`: the `user_list` is a field
+necessary to have user defined function, for example:
+  - `square [dup *] def`.
+- Implement counter reference handling and free object functions.
+- Fix memory leak during parsing.
+- Initial implementation of `callSymbol`.
+- Complete the basic stuff in `createContext`, this needs to
+be continued with the C code possible callbacks registration and
+with the Forth functions registrations.
+- NOTE: in `callSymbol` will sit the code that scans the function table
+and actually execute the registered functions in `createContext`.

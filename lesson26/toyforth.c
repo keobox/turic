@@ -35,10 +35,6 @@ typedef struct tfparser {
 	char *p; /* The next token to parse */
 } tfparser;
 
-typedef struct tfctx {
-	tfobj *stack;
-} tfctx;
-
 /* ====================== Object related functions ==================
  * The following functions allocate Toy Forth objects */
 
@@ -93,6 +89,44 @@ tfobj *createBoolObject(int i) {
 	tfobj *o = createObject(TFOBJ_TYPE_BOOL);
 	o->i = i;
 	return o;
+}
+
+/* Forward declare to fix compilation error */
+void release(tfobj *);
+
+/* Free an object and all the other nested object */
+void freeObject(tfobj* o) {
+	assert(o->refcount == 0);
+
+    switch (o->type) {
+		case TFOBJ_TYPE_LIST:
+			for (size_t j = 0; j < o->list.len; j++) {
+				tfobj *ele = o->list.ele[j];
+				release(ele); /* still recursive */
+			}
+			break;
+		case TFOBJ_TYPE_SYMBOL:
+		case TFOBJ_TYPE_STR:
+			free(o->str.ptr);
+			break;
+	}
+	free(o);
+}
+
+/* Free object and handle ref count
+ */
+void release(tfobj *o) {
+	assert(o->refcount > 0);
+	o->refcount--;
+	if (o->refcount == 0)
+		freeObject(o);
+}
+
+
+/* Increment ref count
+ */
+void retain(tfobj *o) {
+	o->refcount++;
 }
 
 /* ============================= List Object ======================== */
@@ -183,7 +217,7 @@ tfobj *compile(char *prg) {
 
 		/* Check if the current token produced a compilation parsing error */
 		if (o == NULL) {
-			/* FIXME: release parsed here */
+			release(parsed);
 			printf("Syntax error near: %32s ... \n", token_start);
 			return NULL;
 		} else {
@@ -210,6 +244,9 @@ void printObject(tfobj *o) {
 			}
 			printf("]");
 			break;
+		case TFOBJ_TYPE_STR:
+			printf("\"%s\"", o->str.ptr);
+			break;
 		case TFOBJ_TYPE_SYMBOL:
 			printf("%s", o->str.ptr);
 			break;
@@ -220,13 +257,56 @@ void printObject(tfobj *o) {
 
 /* =================== Execution and context ======================== */
 
+struct FunctionTable {
+	struct FunctionTableEntry **func_table;
+	size_t func_count;
+};
+
+/* Our execution context.
+ */
+typedef struct tfctx {
+	tfobj *stack;
+	struct FunctionTable functable;
+} tfctx;
+
+/* Function table entry: each of this entry represents a symbol 
+ * associated with a function implementation,
+ */
+struct FunctionTableEntry {
+	tfobj *name;
+	void (*callback) (tfctx *ctx, tfobj *name);
+	/* user defined function */
+	tfobj *user_list;
+};
+
+/* Create program (execution) context
+ */
 tfctx *createContext(void) {
 	tfctx *ctx = xmalloc(sizeof(*ctx));
 	ctx->stack = createListObject();
+	ctx->functable.func_table = NULL;
+	ctx->functable.func_count = 0;
+#if 0
+	/* call a function in C */
+	registerFunction(ctx, "+", basicMathFunctions);
+	/* call user defined function in Forth */
+	registerUserFunction(tfobg *prgList);
+#endif
 	return ctx;
 }
 
-/* Execute the code compiled in a list */
+
+/* Tries to resolve and call the function associated with the symbol
+ * name 'word'. Returns 0 id the symbol was actually bound to a
+ * function, returns 1 otherwise.
+ */
+int callSymbol(tfctx *ctx, tfobj *word) {
+	/* dummy line to fix compilation */
+	printf("%p %p\n", ctx, word);
+	return 0;
+}
+
+/* Execute the code compiled in the 'prg' list */
 void exec(tfctx *ctx, tfobj *prg) {
 	/* Check prg is actually a list obj */
 	assert(prg->type == TFOBJ_TYPE_LIST);
@@ -236,10 +316,12 @@ void exec(tfctx *ctx, tfobj *prg) {
 		switch (word->type) {
 			case TFOBJ_TYPE_SYMBOL:
 				/* Exucute a symbol */
+				callSymbol(ctx, word);
 				break;
 			default:
 				/* Add on stack the other cases */
 				listPush(ctx->stack, word);
+				retain(word);
 				break;
 		}
 	}
