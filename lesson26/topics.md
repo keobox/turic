@@ -9,3 +9,5 @@
   for example `print is-function-valid?` we want just push
   `is-function-valid?` on the stack and not execute right away.
 - Add the raw symbol quoting I did not added in Lesson 25.
+- In case we want implement a real quoting we should add a `quote`
+field in case of strings in `tfobj`.

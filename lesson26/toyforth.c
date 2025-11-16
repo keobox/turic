@@ -20,6 +20,7 @@ typedef struct tfobj {
 		struct {
 			char *ptr;
 			size_t len;
+            // int quoted; // boolean
 		} str;
 		struct {
 			struct tfobj **ele;
