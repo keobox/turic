@@ -199,7 +199,7 @@ void print_object(tfobj *o) {
 			printf("]");
 			break;
 		case TFOBJ_TYPE_SYMBOL:
-			printf("%s", o->str.ptr);
+			printf("'%s", o->str.ptr);
 			break;
 		default:
 			printf("?");

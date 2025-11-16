@@ -8,3 +8,4 @@
   we want to push a symbol on the stack and not execute it
   for example `print is-function-valid?` we want just push
   `is-function-valid?` on the stack and not execute right away.
+- Add the raw symbol quoting I did not added in Lesson 25.
