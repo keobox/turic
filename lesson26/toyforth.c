@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,6 +44,15 @@ typedef struct tfctx {
 
 void *xmalloc(size_t size) {
 	void *ptr = malloc(size);
+	if (ptr == NULL) {
+		fprintf(stderr, "Out of memory allocating %zu bytes\n", size);
+		exit(1);
+	}
+	return ptr;
+}
+
+void *xrealloc(void *oldptr, size_t size) {
+	void *ptr = realloc(oldptr, size);
 	if (ptr == NULL) {
 		fprintf(stderr, "Out of memory allocating %zu bytes\n", size);
 		exit(1);
@@ -99,7 +109,7 @@ tfobj *createListObject(void) {
  * the element added to the list, if needed
  * */
 void listPush(tfobj *l, tfobj *ele) {
-	l->list.ele = realloc(l->list.ele, sizeof(tfobj*) * (l->list.len + 1));
+	l->list.ele = xrealloc(l->list.ele, sizeof(tfobj*) * (l->list.len + 1));
 	l->list.ele[l->list.len] = ele;
 	l->list.len++;
 }
@@ -185,7 +195,7 @@ tfobj *compile(char *prg) {
 
 /* ==================== Execute the Program ========================= */
 
-void print_object(tfobj *o) {
+void printObject(tfobj *o) {
     switch (o->type) {
 		case TFOBJ_TYPE_INT:
 			printf("%d", o->i);
@@ -194,7 +204,7 @@ void print_object(tfobj *o) {
 			printf("[");
 			for (size_t j = 0; j < o->list.len; j++) {
 				tfobj *ele = o->list.ele[j];
-				print_object(ele);
+				printObject(ele);
 				if (j != o->list.len -1)
 					printf(" ");
 			}
@@ -205,6 +215,33 @@ void print_object(tfobj *o) {
 			break;
 		default:
 			printf("?");
+	}
+}
+
+/* =================== Execution and context ======================== */
+
+tfctx *createContext(void) {
+	tfctx *ctx = xmalloc(sizeof(*ctx));
+	ctx->stack = createListObject();
+	return ctx;
+}
+
+/* Execute the code compiled in a list */
+void exec(tfctx *ctx, tfobj *prg) {
+	/* Check prg is actually a list obj */
+	assert(prg->type == TFOBJ_TYPE_LIST);
+
+	for (size_t j = 0; j < prg->list.len; j++) {
+		tfobj *word = prg->list.ele[j];
+		switch (word->type) {
+			case TFOBJ_TYPE_SYMBOL:
+				/* Exucute a symbol */
+				break;
+			default:
+				/* Add on stack the other cases */
+				listPush(ctx->stack, word);
+				break;
+		}
 	}
 }
 
@@ -232,7 +269,13 @@ int main(int argc, char **argv) {
 	printf("Program text: \"%s\"\n", prgtext);
 
 	tfobj *prg = compile(prgtext);
-	print_object(prg);
+	printObject(prg);
+	printf("\n");
+
+	tfctx *ctx = createContext();
+	exec(ctx, prg);
+	printf("Stack content at end: ");
+	printObject(ctx->stack);
 	printf("\n");
 
 	return 0;
