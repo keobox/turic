@@ -186,7 +186,7 @@ tfobj *compile(char *prg) {
 /* ==================== Execute the Program ========================= */
 
 void print_object(tfobj *o) {
-	switch (o->type) {
+    switch (o->type) {
 		case TFOBJ_TYPE_INT:
 			printf("%d", o->i);
 			break;
@@ -195,12 +195,13 @@ void print_object(tfobj *o) {
 			for (size_t j = 0; j < o->list.len; j++) {
 				tfobj *ele = o->list.ele[j];
 				print_object(ele);
-				printf(" ");
+				if (j != o->list.len -1)
+					printf(" ");
 			}
 			printf("]");
 			break;
 		case TFOBJ_TYPE_SYMBOL:
-			printf("'%s", o->str.ptr);
+			printf("%s", o->str.ptr);
 			break;
 		default:
 			printf("?");

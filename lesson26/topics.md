@@ -11,3 +11,4 @@
 - Add the raw symbol quoting I did not added in Lesson 25.
 - In case we want implement a real quoting we should add a `quote`
 field in case of strings in `tfobj`.
+- Remove "quoting" and fix a litte bug in `print_obj`.
