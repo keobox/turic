@@ -38,6 +38,13 @@ typedef struct tfparser {
 /* ====================== Object related functions ==================
  * The following functions allocate Toy Forth objects */
 
+/* ====================== Function prototypes ======================== */
+
+void retain(tfobj *o);
+void release(tfobj *o);
+
+/* ====================== Allocation Wrappers ======================= */
+
 void *xmalloc(size_t size) {
     void *ptr = malloc(size);
     if (ptr == NULL) {
@@ -61,21 +68,6 @@ tfobj *createObject(int type) {
     tfobj *o = (tfobj *)xmalloc(sizeof(tfobj));
     o->type = type;
     o->refcount = 1;
-    return o;
-}
-
-tfobj *createStringObject(char *s, size_t len) {
-    tfobj *o = createObject(TFOBJ_TYPE_STR);
-    o->str.ptr = xmalloc(len + 1);
-    strncpy(o->str.ptr, s, len);
-    o->str.ptr[len] = 0;
-    o->str.len = len;
-    return o;
-}
-
-tfobj *createSymbolObject(char *s, size_t len) {
-    tfobj *o = createStringObject(s, len);
-    o->type = TFOBJ_TYPE_SYMBOL;
     return o;
 }
 
@@ -125,6 +117,43 @@ void release(tfobj *o) {
 /* Increment ref count
  */
 void retain(tfobj *o) { o->refcount++; }
+
+/* ============================ String Object ======================== */
+
+tfobj *createStringObject(char *s, size_t len) {
+    tfobj *o = createObject(TFOBJ_TYPE_STR);
+    o->str.ptr = xmalloc(len + 1);
+    strncpy(o->str.ptr, s, len);
+    o->str.ptr[len] = 0;
+    o->str.len = len;
+    return o;
+}
+
+tfobj *createSymbolObject(char *s, size_t len) {
+    tfobj *o = createStringObject(s, len);
+    o->type = TFOBJ_TYPE_SYMBOL;
+    return o;
+}
+
+/* Compare two string objects 'a' and 'b', returns 0 if the are
+ * the same, 1 if a>b, -1 if a<b the comparison is performed using
+ * memcmp().
+ */
+int compareStringObject(tfobj *a, tfobj *b) {
+    size_t minlen = a->str.len < b->str.len ? a->str.len : b->str.len;
+    int cmp = memcmp(a->str.ptr, b->str.ptr, minlen);
+    if (cmp == 0) {
+        if (a->str.len == b->str.len) return 0;
+        else if (a->str.len > b->str.len) return 1;
+        else return -1;
+    } else {
+        if (cmp < 0) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+}
 
 /* ============================= List Object ======================== */
 
@@ -254,10 +283,45 @@ void printObject(tfobj *o) {
     }
 }
 
+/* Forward declaration to make it compile */
+struct tfctx;
+
+
+/* =================== Basic Standard Library ======================= */
+
+void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
+    /* TODO just to make compiler happy */
+    printf("%p %p\n", ctx, name);
+#if 0
+    if (ctxCheckStackMinLen(ctx, 2) return;
+    tfobj *b = ctxStackPop(ctx, TFOBJ_TYPE_INT);
+    tfobj *a = ctxStackPop(ctx, TFOBJ_TYPE_INT);
+    if (a == NULL || b == NULL) return;
+
+    switch (name->str.ptr[0]) {
+    case '+': result = a->i + b->i; break;
+    case '-': result = a->i - b->i; break;
+    case '*': result = a->i * b->i; break;
+    /* and so forth :-) */
+    }
+    ctxStackPush(ctx, createIntObject(result));
+#endif
+}
+
 /* =================== Execution and context ======================== */
 
+/* Function table entry: each of this entry represents a symbol
+ * associated with a function implementation,
+ */
+typedef struct FunctionTableEntry {
+    tfobj *name;
+    void (*callback) (struct tfctx *ctx, tfobj *name);
+    /* user defined function */
+    tfobj *user_func;
+} tffuncentry;
+
 struct FunctionTable {
-    struct FunctionTableEntry **func_table;
+    tffuncentry **func_table;
     size_t func_count;
 };
 
@@ -268,15 +332,56 @@ typedef struct tfctx {
     struct FunctionTable functable;
 } tfctx;
 
-/* Function table entry: each of this entry represents a symbol
- * associated with a function implementation,
+
+tffuncentry *getFunctionByName(tfctx *ctx, tfobj *name) {
+    for (size_t j=0; j < ctx->functable.func_count; j++) {
+        tffuncentry *fe = ctx->functable.func_table[j] ;
+        if (compareStringObject(fe->name, name) == 0) {
+            return fe;
+        }
+    }
+    return NULL;
+}
+
+/* Push a new function entry in the context. It's up to the caller
+ * to set either the C callback or the list representing the user
+ * defined function.
  */
-struct FunctionTableEntry {
-    tfobj *name;
-    void (*callback)(tfctx *ctx, tfobj *name);
-    /* user defined function */
-    tfobj *user_list;
-};
+tffuncentry *registerFunction(tfctx *ctx, tfobj *name) {
+    ctx->functable.func_table = xrealloc(ctx->functable.func_table,
+            sizeof(tffuncentry*) * (ctx->functable.func_count+1));
+    tffuncentry *fe = xmalloc(sizeof(tffuncentry));
+    ctx->functable.func_table[ctx->functable.func_count] = fe;
+    ctx->functable.func_count++;
+    fe->name = name;
+    fe->callback = NULL;
+    fe->user_func = NULL;
+    retain(name);
+    return fe;
+}
+
+/* Register a new function with the given name in the function table
+ * of the context. The function can't fail since a function with the
+ * same name exists, is replaced by a new one.
+ *
+ */
+void registerCFunction(tfctx *ctx, char *name,
+        void (*callback)(tfctx *ctx, tfobj *name)) {
+    tffuncentry *fe;
+    tfobj *oname = createStringObject(name, strlen(name));
+    fe = getFunctionByName(ctx, oname);
+    if (fe) {
+        if (fe->user_func) {
+            release(fe->user_func);
+            fe->user_func = NULL;
+        }
+        fe->callback = callback;
+    } else {
+        registerFunction(ctx, oname);
+        fe->callback = callback;
+    }
+    release(oname);
+}
 
 /* Create program (execution) context
  */
@@ -285,22 +390,19 @@ tfctx *createContext(void) {
     ctx->stack = createListObject();
     ctx->functable.func_table = NULL;
     ctx->functable.func_count = 0;
-#if 0
 	/* call a function in C */
-	registerFunction(ctx, "+", basicMathFunctions);
-	/* call user defined function in Forth */
-	registerUserFunction(tfobg *prgList);
-#endif
+	registerCFunction(ctx, "+", basicMathFunctions);
     return ctx;
 }
 
 /* Tries to resolve and call the function associated with the symbol
  * name 'word'. Returns 0 id the symbol was actually bound to a
- * function, returns 1 otherwise.
+ * function and was executed, returns 1 otherwise.
  */
 int callSymbol(tfctx *ctx, tfobj *word) {
-    /* dummy line to fix compilation */
-    printf("%p %p\n", ctx, word);
+    tffuncentry *fe = getFunctionByName(ctx, word);
+    /* TODO set error in context */
+    if (fe == NULL) return 1;
     return 0;
 }
 
