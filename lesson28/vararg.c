@@ -16,11 +16,12 @@ void foo(char* fmt, ...) {
             printf("%s\n", s);
         } else {
             printf("Wrong specifier\n");
-            va_end(ap);
-            return;
+            goto cleanup;
         }
         p++;
     }
+
+cleanup:
     va_end(ap);
 }
 
