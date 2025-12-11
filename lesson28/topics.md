@@ -1,0 +1,12 @@
+# Topics
+- Variadic functions, meaning having function with a variable number of arguments.
+- This is a necessary step for error handling in the toy forth interpreter.
+- See `man va_start`.
+- The "object" to access "variable arguments" is `va_list` and there are 4 functions
+to manipulate it.
+- A variadic function is defined like this `foo(char *fmt, ...`) using "ellipses".
+- Inside the function is necessary to use the "access functions" like `va_start`.
+- Typically there are `va_list` variables to access these variable handling objects.
+- NOTE: the ellipses is a C syntax, but variable handling is not.
+- `va_start va_arg va_copy va_end` are macros in `sdtarg.h`.
+- NOTE: `last` is the last "normal" argument before the variable arguments.
