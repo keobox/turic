@@ -10,3 +10,7 @@ to manipulate it.
 - NOTE: the ellipses is a C syntax, but variable handling is not.
 - `va_start va_arg va_copy va_end` are macros in `sdtarg.h`.
 - NOTE: `last` is the last "normal" argument before the variable arguments.
+- Why we have to specify the type of a variable?
+  - No warnings in compile pass because macros will expand a wrong return type.
+  - In general C has not a way to know the type at runtime and compile time,
+  can't infer from type of argument passed.
