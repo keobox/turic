@@ -18,3 +18,4 @@ to manipulate it.
 - `man 3 printf`.
 - There are "kind" of printf that start with "v" suffix, like `vprintf` that takes
 a `va_list` as final argument.
+- Now we have the knoledge for implementing the "set context error for toyforth".
