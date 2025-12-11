@@ -14,3 +14,7 @@ to manipulate it.
   - No warnings in compile pass because macros will expand a wrong return type.
   - In general C has not a way to know the type at runtime and compile time,
   can't infer from type of argument passed.
+- What if I want to call a variadic function that calls another variadic function?
+- `man 3 printf`.
+- There are "kind" of printf that start with "v" suffix, like `vprintf` that takes
+a `va_list` as final argument.
