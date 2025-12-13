@@ -293,7 +293,7 @@ void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
     /* TODO just to make compiler happy */
     printf("%p %p\n", ctx, name);
 #if 0
-    if (ctxCheckStackMinLen(ctx, 2) return;
+    if (ctxCheckStackMinLen(ctx, 2)) return;
     tfobj *b = ctxStackPop(ctx, TFOBJ_TYPE_INT);
     tfobj *a = ctxStackPop(ctx, TFOBJ_TYPE_INT);
     if (a == NULL || b == NULL) return;
