@@ -7,6 +7,9 @@
 
 /* ========================= Data Structures ======================== */
 
+#define TF_OK 0
+#define TF_ERR 1
+
 #define TFOBJ_TYPE_INT 0
 #define TFOBJ_TYPE_STR 1
 #define TFOBJ_TYPE_BOOL 2
@@ -288,24 +291,22 @@ struct tfctx;
 
 
 /* =================== Basic Standard Library ======================= */
+//void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
 
-void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
-    /* TODO just to make compiler happy */
-    printf("%p %p\n", ctx, name);
-#if 0
-    if (ctxCheckStackMinLen(ctx, 2)) return;
+int basicMathFunctions(tfctx *ctx, char *name) {
+    if (ctxCheckStackMinLen(ctx, 2)) return TF_ERR;
     tfobj *b = ctxStackPop(ctx, TFOBJ_TYPE_INT);
     tfobj *a = ctxStackPop(ctx, TFOBJ_TYPE_INT);
-    if (a == NULL || b == NULL) return;
+    if (a == NULL || b == NULL) return TF_ERR;
 
-    switch (name->str.ptr[0]) {
+    int result;
+    switch (name->[0]) {
     case '+': result = a->i + b->i; break;
     case '-': result = a->i - b->i; break;
     case '*': result = a->i * b->i; break;
-    /* and so forth :-) */
     }
     ctxStackPush(ctx, createIntObject(result));
-#endif
+    return TF_OK;
 }
 
 /* =================== Execution and context ======================== */
@@ -313,9 +314,10 @@ void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
 /* Function table entry: each of this entry represents a symbol
  * associated with a function implementation,
  */
+struct tfctx;
 typedef struct FunctionTableEntry {
     tfobj *name;
-    void (*callback) (struct tfctx *ctx, tfobj *name);
+    int (*callback) (struct tfctx *ctx, char *name);
     /* user defined function */
     tfobj *user_func;
 } tffuncentry;
@@ -366,7 +368,7 @@ tffuncentry *registerFunction(tfctx *ctx, tfobj *name) {
  *
  */
 void registerCFunction(tfctx *ctx, char *name,
-        void (*callback)(tfctx *ctx, tfobj *name)) {
+        int (*callback)(tfctx *ctx, tfobj *name)) {
     tffuncentry *fe;
     tfobj *oname = createStringObject(name, strlen(name));
     fe = getFunctionByName(ctx, oname);
@@ -402,12 +404,20 @@ tfctx *createContext(void) {
 int callSymbol(tfctx *ctx, tfobj *word) {
     tffuncentry *fe = getFunctionByName(ctx, word);
     /* TODO set error in context */
-    if (fe == NULL) return 1;
-    return 0;
+    if (fe == NULL) return TF_ERR;
+    if (fe->user_func) {
+        /* TODO implement me, call 'exec' */
+        printf("Not implemented yet\n")
+        return TF_ERR
+    } else {
+        /* Call back case, stack frame should be necessary here */
+        return fe->callback(ctx, fe->name->str.ptr);
+    }
+    return TF_OK;
 }
 
 /* Execute the code compiled in the 'prg' list */
-void exec(tfctx *ctx, tfobj *prg) {
+int exec(tfctx *ctx, tfobj *prg) {
     /* Check prg is actually a list obj */
     assert(prg->type == TFOBJ_TYPE_LIST);
 
@@ -415,8 +425,11 @@ void exec(tfctx *ctx, tfobj *prg) {
         tfobj *word = prg->list.ele[j];
         switch (word->type) {
         case TFOBJ_TYPE_SYMBOL:
-            /* Exucute a symbol */
-            callSymbol(ctx, word);
+            /* Execute a symbol */
+            if (callSymbol(ctx, word) == TF_ERR) {
+                print("Run time error\n");
+                return TF_ERR;
+            }
             break;
         default:
             /* Add on stack the other cases */
@@ -425,6 +438,7 @@ void exec(tfctx *ctx, tfobj *prg) {
             break;
         }
     }
+    return TF_OK
 }
 
 /* ============================ Main ================================ */
