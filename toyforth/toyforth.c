@@ -474,9 +474,19 @@ int exec(tfctx *ctx, tfobj *prg) {
 
 int basicMathFunctions(tfctx *ctx, char *name) {
     if (ctxCheckStackMinLen(ctx, 2)) return TF_ERR;
+
+#if 0
+    /* TODO */
+    if (ctxCheckTypes(ctx, TFOBJ_TYPE_INT, TFOBJ_TYPE_INT, -1));
+#endif
+
     tfobj *b = ctxStackPop(ctx, TFOBJ_TYPE_INT);
+    if (b == NULL) return TF_ERR;
     tfobj *a = ctxStackPop(ctx, TFOBJ_TYPE_INT);
-    if (a == NULL || b == NULL) return TF_ERR;
+    if (a == NULL) {
+        ctxStackPush(ctx, b);
+        return TF_ERR;
+    }
 
     int result;
     switch (name[0]) {
@@ -484,6 +494,8 @@ int basicMathFunctions(tfctx *ctx, char *name) {
     case '-': result = a->i - b->i; break;
     case '*': result = a->i * b->i; break;
     }
+    release(a);
+    release(b);
     ctxStackPush(ctx, createIntObject(result));
     return TF_OK;
 }

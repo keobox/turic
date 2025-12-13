@@ -1,0 +1,4 @@
+This is a work in progress program for a very small and simplr FORTH interpreter
+(actually it's a FORTH like interpreter, not really a fork).
+I understand there are missing parts, such as ctxSetError(), stack frames and
+so forth. However please tellme if you can spot any obviuos bug in what is already written.
