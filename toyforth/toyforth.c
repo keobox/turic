@@ -39,11 +39,6 @@ typedef struct tfparser {
     char *p;   /* The next token to parse */
 } tfparser;
 
-/* Forward declaration to make compiler happy */
-#if 0
-typedef struct tfctx tfctx;
-#endif
-
 /* Function table entry: each of this entry represents a symbol
  * associated with a function implementation,
  */
@@ -76,6 +71,10 @@ typedef struct tfctx {
 
 void retain(tfobj *o);
 void release(tfobj *o);
+
+/* ====================== Library prototypes ======================== */
+
+int basicMathFunctions(tfctx *, char *);
 
 /* ====================== Allocation Wrappers ======================= */
 
@@ -398,7 +397,7 @@ tffuncentry *registerFunction(tfctx *ctx, tfobj *name) {
  *
  */
 void registerCFunction(tfctx *ctx, char *name,
-        int (*callback)(tfctx *ctx, tfobj *name)) {
+        int (*callback)(tfctx *ctx, char *name)) {
     tffuncentry *fe;
     tfobj *oname = createStringObject(name, strlen(name));
     fe = getFunctionByName(ctx, oname);
@@ -409,7 +408,7 @@ void registerCFunction(tfctx *ctx, char *name,
         }
         fe->callback = callback;
     } else {
-        registerFunction(ctx, oname);
+        fe = registerFunction(ctx, oname);
         fe->callback = callback;
     }
     release(oname);
@@ -472,7 +471,6 @@ int exec(tfctx *ctx, tfobj *prg) {
 }
 
 /* =================== Basic Standard Library ======================= */
-//void basicMathFunctions(struct tfctx *ctx, tfobj *name) {
 
 int basicMathFunctions(tfctx *ctx, char *name) {
     if (ctxCheckStackMinLen(ctx, 2)) return TF_ERR;
@@ -511,7 +509,6 @@ int main(int argc, char **argv) {
     fread(prgtext, file_size, 1, fp);
     prgtext[file_size] = 0;
     fclose(fp);
-    printf("Program text: \"%s\"\n", prgtext);
 
     tfobj *prg = compile(prgtext);
     printObject(prg);
