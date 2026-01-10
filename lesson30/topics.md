@@ -31,7 +31,7 @@ transform the RGB image in RAM into a visualization on screen.
 - The real algorithm has tricks to avoid local minima, one is "curriculum learning", the other trick
 is temperature, if temperature is high we mutate more and is possible to accept a image worst than
 before when temperature goes down this acceptance happens less or not happen and mutation is low.
-- The mail loop is in the `while(1)` under `flot temperature = 0.1`.
+- The mail loop is in the `while(1)` under `float temperature = 0.1`.
 - In reality in this algorithm worst images are not accepted because we do 5 evolutions then check.
 - In the end is stated that a sort of dithering is performed.
 - References:
@@ -39,3 +39,11 @@ before when temperature goes down this acceptance happens less or not happen and
   - [Dithering](https://en.wikipedia.org/wiki/Dither)
   - [Evolutianry algorithm](https://en.wikipedia.org/wiki/Evolutionary_algorithm)
   - [Sinclair ULA](https://sinclair.wiki.zxnet.co.uk/wiki/ZX_Spectrum_ULA)
+  - [Simulated annealing video](https://www.youtube.com/watch?v=aii__13k52M)
+- After watching the Simulated annealing video above, here is other use cases of Simulated Annealing:
+  - Salesman problem: or finding the longest path in this case by perturbating a random path in a graph
+  this is a notable NP complete problem, in this case Simulated Annealing is an approximation.
+  - Evolving a neural networks in case we cannot use gradient descent to train a network because we don't have a training set.
+    - My NOTE: this is something I know and a nice example of this is Flappy Bird neural network player using a genetic algorithm for training the net.
+      - [Machine Learning for Flappy Bird using Neural Network and Genetic Algorithm](https://github.com/ssusnic/Machine-Learning-Flappy-Bird)
+      - In this case the difference of GA and SA is super clear since above there is a real population of birds generated.
