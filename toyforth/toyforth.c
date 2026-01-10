@@ -387,6 +387,7 @@ tffuncentry *registerFunction(tfctx *ctx, tfobj *name) {
     fe->name = name;
     fe->callback = NULL;
     fe->user_func = NULL;
+    /* Next retain not present in github version */
     retain(name);
     return fe;
 }
