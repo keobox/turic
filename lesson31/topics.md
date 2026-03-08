@@ -45,3 +45,9 @@ Put the script somewhere into /tmp.
   - Do this: all you learned about this project that will be useful for the next sessions (only what is really relevant), should be written in CLAUDE.md, so in the next sessions you will know the fundamental ideas immeditaly.
 - Adding a "zoom" feature prompt:
   - Please add --zoom option that will display zoomed SDL preview. The parameters dictates the zoom level, like, --zoom 2 
+- Appendix, new features
+  - Remove curriculum learning, that was a way to change mutation "rate" to avoid local minima.
+  - "color-bonus" a value to avoid dischromia
+  - "saturation boost"
+  - "only bright or no bright"
+- Unfortunately all the code was not delivered in Github.
