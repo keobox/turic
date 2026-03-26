@@ -75,6 +75,8 @@ void release(tfobj *o);
 /* ====================== Library prototypes ======================== */
 
 int basicMathFunctions(tfctx *, char *);
+int stackFunctions(tfctx *, char *);
+int printFunction(tfctx *, char *);
 
 /* ====================== Allocation Wrappers ======================= */
 
@@ -424,6 +426,10 @@ tfctx *createContext(void) {
     ctx->functable.func_count = 0;
 	/* call a function in C */
 	registerCFunction(ctx, "+", basicMathFunctions);
+	registerCFunction(ctx, "-", basicMathFunctions);
+	registerCFunction(ctx, "*", basicMathFunctions);
+	registerCFunction(ctx, "dup", stackFunctions);
+	registerCFunction(ctx, "print", printFunction);
     return ctx;
 }
 
@@ -498,6 +504,30 @@ int basicMathFunctions(tfctx *ctx, char *name) {
     release(a);
     release(b);
     ctxStackPush(ctx, createIntObject(result));
+    return TF_OK;
+}
+
+/* =================== Stack Standard Library ======================= */
+
+int stackFunctions(tfctx *ctx, char *name) {
+    if (strcmp(name, "dup") == 0) {
+        if (ctxCheckStackMinLen(ctx, 1)) return TF_ERR;
+        tfobj *top = ctx->stack->list.ele[ctx->stack->list.len-1];
+        retain(top);
+        ctxStackPush(ctx, top);
+        return TF_OK;
+    }
+    return TF_ERR;
+}
+
+/* =================== Print Standard Library ======================= */
+
+int printFunction(tfctx *ctx, char *name) {
+    if (ctxCheckStackMinLen(ctx, 1)) return TF_ERR;
+    tfobj *o = listPop(ctx);
+    printObject(o);
+    printf("\n");
+    release(o);
     return TF_OK;
 }
 
